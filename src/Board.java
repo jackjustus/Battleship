@@ -1,21 +1,75 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
+// Written by Jack Justus
 public class Board {
 
+    // Class variables
+    private boolean[] squares;
+    private ArrayList<Ship> ships;
 
-    boolean[] squares; 
-    ArrayList<Ship>;
-    2d boolean array named Squares
-    Arraylist of ships
-    Initialization method:
-    Loops through the five ships asking if they want the ship to be vertical or horizontal and then asks where they want the ship to be placed. Checks to see if the ship can be placed there.
-    Int checkGuess(int x, int y)
-    For (ships in board)
-    //Checks coordinates against ship’s coordinates
-    Returns
-0 = no hit
-				1 = you hit part of the ship
-				2 = you sunk a ship
+    // Initialized in the initializer, same every game
+    private int[] shipLengths;
+
+    // Num Ships constant
+    static final int NUM_SHIPS = 5;
+
+    Scanner s;
+
+    // Initializing the Board object, takes in the numShips (constant set in game class)
+    // Runs through a for loop initializing each ship with the player's input
+    public Board() {
+
+        // lengths of the ships
+        shipLengths = new int[]{5, 4, 3, 3, 2};
+
+        // Make scanner
+        s = new Scanner(System.in);
+
+        // Initializing Ship objects using player input
+        print("Time to make your ships!\n\n");
+        for (int i = 0; i < NUM_SHIPS; i++) {
+
+            // Ship(int length, int x, int y, boolean isVertical)
+            print("This ship has a length of " + shipLengths[i] + ".\n");
+            print("Where would you like to place it?\n")
+
+
+            ship = new Ship();
+
+        }
+
+    }
+
+    private int getXValue() {
+
+        // Making the while loop work
+        boolean inputValid = false;
+
+        // Intellij is being stupid about initializing this variable to do this
+        int xValue = 0;
+
+        while (!inputValid)
+            try {
+                print("Please type the x position in a single digit integer from 1-10\n");
+                xValue = s.nextInt();
+                inputValid = true;
+            } catch (Exception e) {
+            }
+//                    e.printStackTrace();
+        return xValue;
+
+    }
+
+    public void printBoard() {
+
+    }
+
+
+    // Simplified Printing
+    private void print(String s) {
+        System.out.print(s);
+    }
 
 
 }
