@@ -42,11 +42,14 @@ public class Ship {
     private int length;
     private boolean isVertical;
     private int [][] coordinates;
-    private int num;
 
 
     //the ship
     public Ship(int length, int x, int y, boolean isVertical){
+
+
+        // Initializing class variables
+        this.length = length;
 
 
         //makes the ships coordinates
