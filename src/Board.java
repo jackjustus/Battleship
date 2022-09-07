@@ -32,9 +32,8 @@ public class Board {
 
             // Ship(int length, int x, int y, boolean isVertical)
             print("This ship has a length of " + shipLengths[i] + ".\n");
-            print("Where would you like to place it?\n")
-
-
+            print("Where would you like to place it?\n");
+            int x = getXValue();
             ship = new Ship();
 
         }
@@ -53,6 +52,29 @@ public class Board {
             try {
                 print("Please type the x position in a single digit integer from 1-10\n");
                 xValue = s.nextInt();
+                inputValid = true;
+            } catch (Exception e) {
+            }
+//                    e.printStackTrace();
+        return xValue;
+
+    }
+
+    private int getYValue() {
+
+        // Making the while loop work
+        boolean inputValid = false;
+
+        // Intellij is being stupid about initializing this variable to do this
+        int yValue = 0;
+
+        // The Y value is inputted as a character, so we need this before we can convert it to a number
+        String tempYValue;
+
+        while (!inputValid)
+            try {
+                print("Please type the y position in a single letter from A-J\n");
+                tempYValue = s.nextLine();
                 inputValid = true;
             } catch (Exception e) {
             }
