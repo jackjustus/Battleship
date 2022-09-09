@@ -29,6 +29,12 @@ public class Board {
         // Initialize arrayList
         ships = new ArrayList<Ship>();
 
+        // Initialize Board squares
+        // -1 = hit
+        // 0 = empty
+        // 1 = ship
+        squares = new int[10][10];
+
         // Initializing Ship objects using player input
         print("Time to make your ships!\n\n");
         for (int i = 0; i < NUM_SHIPS; i++) {
@@ -49,12 +55,33 @@ public class Board {
                 isVertical = false;
 
 
-            // We now use this method to retrive the x value of the ship
-            int x = getXValue(i);
+            // We now use this method to retrieve the x value of the ship
+            int x = getValue(i, "x");
             // And then validate the input
             // inputXValidation(boolean isVertical, int value, boolean isXValue, int shipLength)
-            while (!inputXValidation(isVertical, x, true, shipLengths[i]))
-                x = getXValue(i);
+            while (!inputValidation(isVertical, x, true, shipLengths[i]))
+                x = getValue(i, "x");
+
+            // Time for y value
+
+            int y = getValue(i, "y");
+
+            // Input Validation
+            while (!inputValidation(isVertical, y, false, shipLengths[i])) {
+
+                print("Sorry, but that coordinate is not valid.\nPlease try another y value");
+                y = getValue(i, "y");
+
+            }
+
+            // Converting isVertical to a string
+            String verticalString;
+            if (isVertical)
+                verticalString = "vertical";
+            else
+                verticalString = "horizontal";
+
+            print("You placed a " + verticalString + " length " + shipLengths[i] + " ship at " + x + ", " + y + "\n");
 
 
             // Ship(int length, int x, int y, boolean isVertical)
@@ -80,8 +107,9 @@ public class Board {
 
                 // Checking to see if the input is valid
                 // If it is valid then the loop will end
-                if (inputRotationValidation(rotationalValue))
-                    inputValid = true;
+                while (!inputRotationValidation(rotationalValue))
+                    rotationalValue = s.nextInt();
+                inputValid = true;
 
             } catch (Exception e) {
             }
@@ -91,7 +119,60 @@ public class Board {
 
     }
 
-    private int getXValue(int i) {
+    private int getValue(int i, String typeOfValue) {
+
+        // Making the while loop work
+        boolean inputValid = false;
+
+        // Intellij is being stupid about initializing this variable to do this
+        int value = 0;
+
+        // Master try catch because there is a lot of possible places of failure
+        try {
+            print("This ship has a length of " + shipLengths[i] + ".\n");
+            print("Where would you like to place it?\n");
+            print("Please type the " + typeOfValue + " position in a ");
+
+            // What the player types differs based on if it is a x or y value
+            if (typeOfValue.equals("x")) {
+
+                print("number from 1 - 10.\n");
+                value = s.nextInt();
+
+            } else if (typeOfValue.equals("y")) {
+
+                print("letter from A - J\n");
+                // Because the player is inputting a letter we need to convert it to a number
+                // Also scanner is being stupid so this is necessary
+                String temp = s.nextLine();
+                temp = s.nextLine();
+
+                // Putting this in a try catch just in case
+                try {
+                    value = translate.convert(temp);
+                } catch (Exception e) {
+                    // e.printStackTrace();
+
+                    print("The letter you entered is not valid");
+
+                    // This flags the input validation and will prompt the player to input a new number by running this method again
+                    return 999;
+                }
+
+            }
+
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            print("getValue has failed");
+        }
+//                    e.printStackTrace();
+        return value;
+
+    }
+
+    private int getYValue(int i) {
 
         // Making the while loop work
         boolean inputValid = false;
@@ -113,32 +194,6 @@ public class Board {
 //                    e.printStackTrace();
         return xValue;
 
-    }
-
-    private int getYValue() {
-
-        // Making the while loop work
-        boolean inputValid = false;
-
-        // Intellij is being stupid about initializing this variable to do this
-        int yValue = 0;
-
-        // The Y value is inputted as a character, so we need this before we can convert it to a number
-        String tempYValue;
-
-        while (!inputValid)
-            try {
-
-                print("Please type the y position in a single letter from A-J\n");
-                tempYValue = s.nextLine();
-                inputValid = true;
-                yValue = translate.convert(tempYValue);
-
-
-            } catch (Exception e) {
-            }
-//                    e.printStackTrace();
-        return yValue;
 
     }
 
@@ -173,16 +228,16 @@ public class Board {
             } else {
                 for (int i = 0; i < shipLength; i++) {
 
-                    for (int j = 0; j < ships.size(); j++) {
+                        for (int j = 0; j < ships.size(); j++) {
 
-                        for (int k = 0; k < ships.get(j).getCoordinates().length; k++) {
+                            for (int k = 0; k < ships.get(j).getCoordinates().length; k++) {
 
-                            if (value == ships.get(j).getCoordinates()[0][k]) {
-                                works++;
+                                if (value == ships.get(j).getCoordinates()[0][k]) {
+                                    works++;
+                                }
                             }
                         }
                     }
-                }
             }
 
 
