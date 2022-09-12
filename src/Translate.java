@@ -5,7 +5,7 @@ public class translate {
 
     //class for translating letter to number index
 
-    public translate() {
+    public Translate() {
 
     }
 

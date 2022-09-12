@@ -17,9 +17,9 @@ public class Player {
     private boolean numShipsGood;
 
     public Player() {
-
-        t = new translate();
-
+        //Initializes variables for player
+        otherPlayerSunken = 0;
+        t = new Translate();
         numShipsGood = false;
 
         s = new Scanner(System.in);
@@ -46,9 +46,15 @@ public class Player {
 
     }
 
-    public boolean attack() {
-        int x;
-        int y;
+    //takes coordinates from player and checks if it's a hit
+    public void attack(Board b1) {
+        boolean attackAvailable = true;
+        boolean secondTime = false;
+        int x = 0;
+        int y = 0;
+        int xTemp = -1;
+        int yTemp = -1;
+        int timesThru = 0;
         b.printBoard();
         boolean c;
         //asks for coordinates of a space the player would like to guess
