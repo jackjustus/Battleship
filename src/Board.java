@@ -219,12 +219,17 @@ public class Board {
 
     }
 
-    // Kaden's Code
-    private boolean inputXValidation(boolean isVertical, int value, boolean isXValue, int shipLength) {
+
+    private boolean inputValidation(boolean isVertical, int value, boolean isXValue, int shipLength) {
+
+        //this bit checks to see if it doens't work
+        int works = 0;
 
 
         //i do not know how this works or if it works
-        int works = 0;
+        //The Himalayas of Validation
+        /*
+
         if (isXValue == true) {
             if (isVertical == true) {
                 for (int i = 0; i < shipLength; i++) {
@@ -240,7 +245,10 @@ public class Board {
                     }
                 }
             } else {
-                for (int i = 0; i < shipLength; i++) {
+                if (value > (10 - shipLength)){
+                    return false;
+                }
+                    for (int i = 0; i < shipLength; i++) {
 
                         for (int j = 0; j < ships.size(); j++) {
 
@@ -253,12 +261,11 @@ public class Board {
                         }
                     }
             }
-
-
         } else {
-
-
             if (isVertical == true) {
+                if (value > (10 - shipLength)) {
+                    return false;
+                }
                 for (int i = 0; i < shipLength; i++) {
 
                     for (int j = 0; j < ships.size(); j++) {
@@ -285,18 +292,57 @@ public class Board {
                     }
                 }
             }
+        }
+         */
+
+        //the better validation
+        for (int i = 0; i < shipLength; i++) {
+
+            for (int j = 0; j < ships.size(); j++) {
+
+                for (int k = 0; k < ships.get(j).getCoordinates().length; k++) {
 
 
+                    if (isXValue == true) {
+                        if (isVertical == true) {
+                            if (value == ships.get(j).getCoordinates()[1][k]) {
+                                works++;
+                            }
+                        } else {
+                            if (value > (10 - shipLength)) {
+                                return false;
+                            }
+                            if (value == ships.get(j).getCoordinates()[0][k]) {
+                                works++;
+                            }
+                        }
+
+                    } else {
+                        if (isVertical == true) {
+                            if (value > (10 - shipLength)) {
+                                return false;
+                            }
+                            if (value == ships.get(j).getCoordinates()[k][1]) {
+                                works++;
+                            }
+                        } else {
+                            if (value == ships.get(j).getCoordinates()[k][0]) {
+                                works++;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
 
+        //more checking to see if it works
         if (works == shipLength) {
             return false;
         } else {
             return true;
         }
-        // Take the value and orentation and determine if the ship's position is wihtin the bounds of the board
-        // Return the
+
 
     }
 
