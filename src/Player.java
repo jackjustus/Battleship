@@ -21,13 +21,14 @@ public class Player {
         otherPlayerSunken = 0;
         t = new Translate();
         numShipsGood = false;
-
         s = new Scanner(System.in);
 
+        //Gets players name
         System.out.println("State your name:");
-        name = s.next();
+        name = s.nextLine();
         System.out.println("Excellent.");
 
+        //just for fun
         //asks for number of ships player would like to play with
         //once valid num is given initializes Board "b" based on ships in Board class
         while (!numShipsGood) {
@@ -56,7 +57,7 @@ public class Player {
         int yTemp = -1;
         int timesThru = 0;
         b.printBoard();
-        boolean c;
+
         //asks for coordinates of a space the player would like to guess
         while (attackAvailable) {
             //second time boolean for ease of play not functionallity
@@ -92,7 +93,8 @@ public class Player {
                 System.out.println("Which number coordinate for the column would you like to enter?");
                 x = s.nextInt();
 
-            } else {
+            }
+            else {
                 System.out.println("Please enter the coordinates \n of the space you would like to attack?");
                 while (yTemp == -1) {
                     if (timesThru >= 1) {

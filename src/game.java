@@ -1,6 +1,16 @@
+import java.util.Scanner;
+
 public class game {
-    private boolean gOver;
+
+
+    private boolean play;
     private int [] spacesUsed;
+    private Scanner r;
+    int userint;
+
+    public static void main(String[] args) {
+        Board b = new Board();
+    }
 
     public static void main(String[] args) {
 
