@@ -89,6 +89,14 @@ public class Ship {
 
     }
 
+    public ArrayList<Integer> getXpos() {
+        return xpos;
+    }
+
+    public ArrayList<Integer> getYpos() {
+        return ypos;
+    }
+
 
     //returns said array
     public int[][] getCoordinates() {

@@ -1,20 +1,27 @@
-import java.util.ArrayList;
-
 import java.util.Scanner;
-// Two player objects each with their own board
+
+//Two player objects each with their own board
 public class Player {
 
-    private boolean attackAvailable;
 
-    private translate t;
-
+    private Translate t;
     private String name;
-
     private Scanner s;
-
     private Board b;
+    //checks amount of opponents ships sunken
+    private int otherPlayerSunken;
 
     private boolean numShipsGood;
+
+    public Player(String computer){
+        //Initializes variables for computer
+        numShipsGood = false;
+        s = new Scanner(System.in);
+        name = computer;
+        b = new Board();
+        numShipsGood = true;
+        otherPlayerSunken = 0;
+    }
 
     public Player() {
         //Initializes variables for player
@@ -37,7 +44,7 @@ public class Player {
                 if (s.nextInt() == 5)
                     System.out.println("Ok.");
                 else
-                    System.out.println("Too bad. Your playing with five.");
+                    System.out.println("Too bad. You're playing with five.");
                 b = new Board();
                 numShipsGood = true;
             } catch (Error e) {
@@ -45,6 +52,10 @@ public class Player {
             }
         }
 
+    }
+
+    public Board getBoard(){
+        return b;
     }
 
     //takes coordinates from player and checks if it's a hit
@@ -124,17 +135,23 @@ public class Player {
         }
 
 
-        //checks if the position the user guess is a hit, miss, or already guessed
-        if (b.getSquares()[x][y] == 0) {
+        //checks if the position the user guessed is a hit, miss, or already guessed
+        if (b1.getIntSquares()[y][x] == 0) {
             System.out.println("Miss");
+            b1.shoot(y,x);
             attackAvailable = false;
-        } else if (b.getSquares()[x][y] == -1) {
+        } else if (b1.getIntSquares()[y][x] == -1) {
             System.out.println("You already guessed there silly. Guess again");
             secondTime = true;
         } else {
-            System.out.println("HIT DADDY");
-            b.hit(x, y);
-            attackAvailable = false;
+            System.out.println("JUSTUS HAS BEEN SERVED. (Hit)");
+            b1.shoot(y, x);
+
+            //checks if a board is
+            if(b1.checkSunk(y,x, b1)){
+                System.out.println("SUNK!");
+                otherPlayerSunken++;
+            }
         }
     }
 }

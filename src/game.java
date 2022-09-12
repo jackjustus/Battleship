@@ -12,9 +12,13 @@ public class game {
         Board b = new Board();
     }
 
-    public static void main(String[] args) {
+    public game() {
+        play = true;
 
-        //Testing the board class
+    }
+
+    public void play() {
+
         Board b = new Board();
         r = new Scanner(System.in);
         userint = 0;

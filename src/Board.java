@@ -4,8 +4,9 @@ import java.util.Scanner;
 // Written by Jack Justus
 public class Board {
 
+
     // Class variables
-    private boolean[] squares;
+    private String[][] squares;
     private ArrayList<Ship> ships;
 
     // Initialized in the initializer, same every game
@@ -348,13 +349,96 @@ public class Board {
 
 
     public void printBoard() {
+        //prints the board
 
+
+        //prints outnumbrs
+        print("  1 2 3 4 5 6 7 8 9 10");
+        for (int i = 0; i < squares.length; i++) {
+            if (i > 0) {
+                print(Translate.convert(i));
+            }
+            for (int j = 0; j < squares.length; j++) {
+                print(squares[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+
+    public void shoot(int x, int y) {
+        squares[x][y] = "-1";
+    }
+
+
+    //checks to see if a ship has been sunk
+    public boolean checkSunk(int x, int y, Board b1) {
+
+        //defines which ship was hit
+        int hitShip = 0;
+
+
+        //figures out what ship was hit
+        for (int i = 0; i < ships.size(); i++) {
+            for (int j = 0; j < ships.get(i).getCoordinates().length; j++) {
+
+                if (ships.get(i).getCoordinates()[j][0] == x) {
+                    if (ships.get(i).getCoordinates()[j][1] == y) {
+                        hitShip = i;
+                    }
+                }
+
+            }
+        }
+
+
+        //checks to see if said ship is completely sunk
+        int shipSlots = ships.get(hitShip).getCoordinates().length;
+        int count = 0;
+        for (int i = 0; i < shipSlots; i++) {
+            if (b1.getIntSquares()[ships.get(hitShip).getCoordinates()[i][0]][ships.get(hitShip).getCoordinates()[i][1]] == -1) {
+                count++;
+            }
+        }
+
+
+        if (count == shipSlots) {
+            System.out.println("You sunk the " + ships.get(hitShip).getName() + "!");
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
+    public int[][] getIntSquares() {
+
+        int[][] intSquares = new int[squares.length][squares[0].length];
+        // Converting the array to an array of Ints
+        for (int i = 0; i < squares.length; i++) {
+            for (int j = 0; j < squares[i].length; i++) {
+
+                // This statement will fail if the space is not a number
+                try {
+                    intSquares[i][j] = Integer.parseInt(squares[i][j]);
+                } catch (Exception e) {
+
+                }
+
+            }
+        }
+        return squares;
     }
 
 
     // Simplified Printing
     private void print(String s) {
         System.out.print(s);
+    }
+
+    private void print(int i) {
+        System.out.print(i);
     }
 
 
