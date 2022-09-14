@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 // Written by Jack Justus
@@ -28,7 +29,7 @@ public class Board {
         s = new Scanner(System.in);
 
         // Initialize arrayList
-        ships = new ArrayList<Ship>();
+        ships = new ArrayList<>();
 
         // Initialize Board squares
         // -1 = hit
@@ -37,9 +38,7 @@ public class Board {
         squares = new String[10][10];
 
         // Making all spaces in the board empty by default
-        for (int i = 0; i < squares.length; i++)
-            for (int j = 0; j < squares[i].length; j++)
-                squares[i][j] = "0";
+        for (String[] square : squares) Arrays.fill(square, "0");
 
         // Initializing Ship objects using player input
         print("Time to make your ships!\n\n");
@@ -127,11 +126,11 @@ public class Board {
 
         int[][] shipPositions = s.getCoordinates();
 
-        for (int i = 0; i < shipPositions.length; i++) {
+        for (int[] shipPosition : shipPositions) {
 
             // Extracting the coordinates from the array
-            int x = shipPositions[i][0];
-            int y = shipPositions[i][1];
+            int x = shipPosition[0];
+            int y = shipPosition[1];
 
             // Getting the ship's associated letter
             String letter = s.getLetter();
