@@ -13,7 +13,7 @@ public class Player {
 
     private boolean numShipsGood;
 
-    public Player(String computer){
+    public Player(String computer) {
         //Initializes variables for computer
         numShipsGood = false;
         s = new Scanner(System.in);
@@ -54,7 +54,7 @@ public class Player {
 
     }
 
-    public Board getBoard(){
+    public Board getBoard() {
         return b;
     }
 
@@ -100,7 +100,7 @@ public class Player {
         //checks if the position the user guessed is a hit, miss, or already guessed
         if (b1.getIntSquares()[y][x] == 0) {
             System.out.println("Miss");
-            b1.shoot(y,x);
+            b1.shoot(y, x);
             attackAvailable = false;
         } else if (b1.getIntSquares()[y][x] == -1) {
             System.out.println("You already guessed there silly. Guess again");

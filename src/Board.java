@@ -20,6 +20,8 @@ public class Board {
 
     // Initializing the Board object, takes in the numShips (constant set in game class)
     // Runs through a for loop initializing each ship with the player's input
+
+
     public Board() {
 
         // lengths of the ships
