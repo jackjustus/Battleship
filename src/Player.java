@@ -58,7 +58,7 @@ public class Player {
         return b;
     }
 
-    //takes coordinates from player and checks if it's a hit
+    //takes coordinates from player and checks if it's a hit, miss, or already guessed
     public void attack(Board b1) {
         boolean attackAvailable = true;
         boolean secondTime = false;
@@ -71,69 +71,31 @@ public class Player {
 
         //asks for coordinates of a space the player would like to guess
         while (attackAvailable) {
-            //second time boolean for ease of play not functionallity
-            timesThru = 0;
-            if (secondTime) {
 
-                //validates guess
-                System.out.println("You already guessed that spot! Enter the coordinates \n of the space you would like to attack?");
-                while (yTemp == -1) {
-                    if (timesThru >= 1) {
-                        System.out.println("You entered an invalid coordinate. Which letter coordinate for the row would you like to enter?");
-                        yTemp = t.convert(s.nextLine());
-                    } else {
-                        System.out.println("Which letter coordinate for the row would you like to enter?");
-                        yTemp = t.convert(s.nextLine());
-                    }
-                    timesThru++;
-                }
-                timesThru = 0;
-                y = yTemp;
-                while (xTemp == -1) {
-                    if (timesThru >= 1) {
-                        System.out.println("You entered an invalid coordinate. Which number coordinate for the column would you like to enter?");
-                        xTemp = s.nextInt();
-                    } else {
-                        System.out.println("Which number coordinate for the column would you like to enter?");
-                        xTemp = s.nextInt();
-                    }
-                    timesThru++;
-                }
-                timesThru = 0;
-                x = xTemp;
-                System.out.println("Which number coordinate for the column would you like to enter?");
-                x = s.nextInt();
-
+            System.out.println(">>Enter the letter coordinate for the row you wish to attack");
+            yTemp = Translate.convert(s.nextLine());
+            while(y == -1) {
+                System.out.println(">>Invalid");
+                System.out.println(">>Enter what letter coordinate you wish to attack");
+                y = Translate.convert(s.nextLine());
             }
-            else {
-                System.out.println("Please enter the coordinates \n of the space you would like to attack?");
-                while (yTemp == -1) {
-                    if (timesThru >= 1) {
-                        System.out.println("You entered an invalid coordinate. Which letter coordinate for the row would you like to enter?");
-                        yTemp = t.convert(s.nextLine());
-                    } else
-                        System.out.println("Which letter coordinate for the row would you like to enter?");
-                    yTemp = t.convert(s.nextLine());
-                }
-                timesThru++;
-            }
-            timesThru = 0;
-            y = yTemp;
-            while (xTemp == -1) {
-                if (timesThru >= 1) {
-                    System.out.println("You entered an invalid coordinate. Which number coordinate for the column would you like to enter?");
-                    xTemp = s.nextInt();
-                } else {
-                    System.out.println("Which number coordinate for the column would you like to enter?");
-                    xTemp = s.nextInt();
-                }
-                timesThru++;
-            }
-            timesThru = 0;
-            x = xTemp;
+            System.out.println(">>Enter the number coordinate for the column you wish to attack");
             x = s.nextInt();
-        }
+            while(x > 10 || x < 1){
+                System.out.println(">>Invalid");
+                System.out.println(">>Enter what number coordinate you wish to attack");
+                x = s.nextInt();
+            }
 
+
+
+
+
+
+
+
+
+        }
 
         //checks if the position the user guessed is a hit, miss, or already guessed
         if (b1.getIntSquares()[y][x] == 0) {
@@ -147,8 +109,8 @@ public class Player {
             System.out.println("JUSTUS HAS BEEN SERVED. (Hit)");
             b1.shoot(y, x);
 
-            //checks if a board is
-            if(b1.checkSunk(y,x, b1)){
+            //checks if a ship will sink
+            if (b1.checkSunk(y, x, b1)) {
                 System.out.println("SUNK!");
                 otherPlayerSunken++;
             }
