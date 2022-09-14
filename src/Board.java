@@ -36,6 +36,11 @@ public class Board {
         // 1 = ship
         squares = new String[10][10];
 
+        // Making all spaces in the board empty by default
+        for (int i = 0; i < squares.length; i++)
+            for (int j = 0; j < squares[i].length; j++)
+                squares[i][j] = "0";
+
         // Initializing Ship objects using player input
         print("Time to make your ships!\n\n");
         for (int i = 0; i < NUM_SHIPS; i++) {
@@ -165,7 +170,8 @@ public class Board {
         try {
 
             // Printing the board to give the player a point of reference
-            printBoard();
+            if (typeOfValue.equals("xPre"))
+                printBoard();
 
             // What is printed and requested differs based on if it is a x or y value
             if (typeOfValue.equals("x")) {
@@ -351,15 +357,20 @@ public class Board {
     public void printBoard() {
         //prints the board
 
+        // Grid
+        print("  1 2 3 4 5 6 7 8 9 10\n");
 
-        //prints outnumbrs
-        print("  1 2 3 4 5 6 7 8 9 10");
         for (int i = 0; i < squares.length; i++) {
-            if (i > 0) {
-                print(Translate.convert(i));
-            }
+
+            // Printing letters
+//            if (i > 0)
+            print(Translate.convert(i) + " ");
+
+            // Printing actual grid spaces
             for (int j = 0; j < squares.length; j++) {
+
                 print(squares[i][j] + " ");
+
             }
             System.out.println();
         }
@@ -423,12 +434,13 @@ public class Board {
                 try {
                     intSquares[i][j] = Integer.parseInt(squares[i][j]);
                 } catch (Exception e) {
-
+                    // This will run if there is a ship at the specified area.
+                    intSquares[i][j] = 1;
                 }
 
             }
         }
-        return squares;
+        return intSquares;
     }
 
 
