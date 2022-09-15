@@ -50,7 +50,11 @@ public class Board {
             // Turns false when the input validation fails.
             boolean inputWorks = false;
 
+            // User Clarity
             boolean firstRun = true;
+
+            // QOL
+            int shipLength = shipLengths[i];
 
             while (!inputWorks) {
 
@@ -60,6 +64,8 @@ public class Board {
 
                 // Starts true and gets sets false when it fails
                 inputWorks = true;
+
+                printBoard();
 
 
                 // Finding the rotation of the ships before they choose the coordinates
@@ -78,11 +84,11 @@ public class Board {
 
 
                 // We now use this method to retrieve the x value of the ship
-                int x = getValue(i, "x");
+                int x = getValue(shipLength, "x");
 
 
                 // Time for y value
-                int y = getValue(i, "y");
+                int y = getValue(shipLength, "y");
 
 
                 // Converting isVertical to a string
@@ -94,10 +100,14 @@ public class Board {
 
                 // At this point we can run input validation for all the inputs.
                 //TODO: Make Input Validation
+                if (inputValidation(x, y, isVertical, shipLength))
+                    inputWorks = true;
+                else
+                    continue;
 
 
                 // Giving the player feedback based on all of their input
-                print("You placed a " + verticalString + " length " + shipLengths[i] + " ship at " + x + ", " + y + "\n");
+                print("You placed a " + verticalString + " length " + shipLength + " ship at " + x + ", " + y + "\n");
 
 
                 // Assigning a letter to the ship based on how many times this loop has run
@@ -106,17 +116,17 @@ public class Board {
 
                 // Actually making the ship object
                 // int length, int x, int y, boolean isVertical, String letter
-                ships.add(new Ship(shipLengths[i], x - 1, y - 1, isVertical, shipLetter));
+                ships.add(new Ship(shipLength, x - 1, y - 1, isVertical, shipLetter));
 
 
                 // Marking on the board where the ship is placed
                 markBoardShipPlacement(ships.get(i));
 
-
-                printBoard();
+                clearConsole();
 
                 // Differentiating between ship placements
-                print("\n\nSHIP PLACEMENT COMPLETE\n\n");
+                print("\n\nShip " + (i + 1) + " Placed.\n\n");
+
 
             }
 
@@ -124,7 +134,7 @@ public class Board {
     }
 
     private void markBoardShipPlacement(Ship s) {
-        // Marking on the board where the ship is placed
+        // Marking on the board where the ship is placed for initial ship setup
 
         int[][] shipPositions = s.getCoordinates();
 
@@ -169,12 +179,13 @@ public class Board {
             } catch (Exception e) {
             }
 //                    e.printStackTrace();
+        print("\n");
         return rotationalValue;
 
 
     }
 
-    private int getValue(int i, String typeOfValue) {
+    private int getValue(int shipLength, String typeOfValue) {
 
         // typeOfValue can either be "x" or "y"
 
@@ -184,24 +195,18 @@ public class Board {
         // Master try catch because there is a lot of possible places of failure
         try {
 
-            // Printing the board to give the player a point of reference
-            if (typeOfValue.equals("x"))
-                printBoard();
-
             // What is printed and requested differs based on if it is an x or y value
             if (typeOfValue.equals("x")) {
 
                 // This is always called first, so it prompts the player to what they are doing
                 // As well as asking them the x value
-                print("This ship has a length of " + shipLengths[i] + ".\n");
-                print("Where would you like to place it?\n Start by entering the x value.\n");
-                print("Please type the x value in a number from 1 - 10.\n");
-                value = s.nextInt();
+                print("This ship has a length of " + shipLength + "\n");
+                print("Please type the [x] value\n >> ");
+                value = s.nextInt() - 1;
 
             } else if (typeOfValue.equals("y")) {
 
-                print("Awesome, thanks for the X value.\n Time for the Y.\n");
-                print("Please type the Y value in a letter from A - J\n");
+                print("Please type the [y] value\n >> ");
                 // Because the player is inputting a letter we need to convert it to a number
                 // Also scanner is being stupid so this is necessary
                 String temp = s.nextLine();
@@ -209,7 +214,7 @@ public class Board {
 
                 // Putting this in a try catch just in case
                 try {
-                    value = Translate.convert(temp);
+                    value = Translate.convert(temp) - 1;
                 } catch (Exception e) {
                     // e.printStackTrace();
 
@@ -238,8 +243,8 @@ public class Board {
     }
 
 
-    private boolean inputValidation(boolean isVertical, int value, boolean isXValue, int shipLength) {
-//
+    private boolean inputValidation(int x, int y, boolean isVertical, int shipLength) {
+        //
 //        //this bit checks to see if it doens't work
 //        int works = 0;
 //
@@ -391,15 +396,115 @@ public class Board {
 //            return true;
 //        }
 
+//        the phenomenon whereby a person is reluctant to abandon a strategy or course of action because they have invested heavily in it, even when it is clear that abandonment would be more beneficial.
+//        "the sunk-cost fallacy creeps into a lot of major financial decisions"
+//        the phenomenon whereby a person is reluctant to abandon a strategy or course of action because they have invested heavily in it, even when it is clear that abandonment would be more beneficial.
+//        "the sunk-cost fallacy creeps into a lot of major financial decisions"
+//        the phenomenon whereby a person is reluctant to abandon a strategy or course of action because they have invested heavily in it, even when it is clear that abandonment would be more beneficial.
+//        "the sunk-cost fallacy creeps into a lot of major financial decisions"
+//        the phenomenon whereby a person is reluctant to abandon a strategy or course of action because they have invested heavily in it, even when it is clear that abandonment would be more beneficial.
+//        "the sunk-cost fallacy creeps into a lot of major financial decisions"
+//        the phenomenon whereby a person is reluctant to abandon a strategy or course of action because they have invested heavily in it, even when it is clear that abandonment would be more beneficial.
+//        "the sunk-cost fallacy creeps into a lot of major financial decisions"
+//        the phenomenon whereby a person is reluctant to abandon a strategy or course of action because they have invested heavily in it, even when it is clear that abandonment would be more beneficial.
+//        "the sunk-cost fallacy creeps into a lot of major financial decisions"
+//        the phenomenon whereby a person is reluctant to abandon a strategy or course of action because they have invested heavily in it, even when it is clear that abandonment would be more beneficial.
+//        "the sunk-cost fallacy creeps into a lot of major financial decisions"
+//        the phenomenon whereby a person is reluctant to abandon a strategy or course of action because they have invested heavily in it, even when it is clear that abandonment would be more beneficial.
+//        "the sunk-cost fallacy creeps into a lot of major financial decisions"
+//        the phenomenon whereby a person is reluctant to abandon a strategy or course of action because they have invested heavily in it, even when it is clear that abandonment would be more beneficial.
+//        "the sunk-cost fallacy creeps into a lot of major financial decisions"
+//        the phenomenon whereby a person is reluctant to abandon a strategy or course of action because they have invested heavily in it, even when it is clear that abandonment would be more beneficial.
+//        "the sunk-cost fallacy creeps into a lot of major financial decisions"
+
+
+        /*
+        for (int i = 0; i < shipLength; i++) {
+
+            for (Ship ship : ships) {
+
+                for (int k = 0; k < ship.getCoordinates().length; k++) {
+
+
+                    if (isVertical == true) {
+
+
+                        if (x == ship.getCoordinates()[k][0]) {
+                            if (y + i == ship.getCoordinates()[k][1]) {
+                                print("fAILDED");
+                                return false;
+
+                            }
+                        }
+                    } else {
+                        if (x + i == ship.getCoordinates()[k][0]) {
+                            if (y == ship.getCoordinates()[k][1]) {
+                                print("fAILDED");
+                                return false;
+
+                            }
+                        }
+                    }
+
+
+                }
+            }
+        }
+
+        print("works");
+        return true;
+
+
+         */
+
+
+        // Start by creating a dummy ship object with an arraylist of the coordinates that it occupies
+        // int length, int x, int y, boolean isVertical, String letter
+        Ship s = new Ship(shipLength, x, y, isVertical, "Z");
+        ArrayList<int[]> shipCoords = new ArrayList<>();
+
+        // Populating the arrayList with the coordinates
+        for (int i = 0; i < s.getCoordinates().length; i++) {
+            shipCoords.add(s.getCoordinates()[i]);
+        }
+
+        for (int i = 0; i < shipCoords.size(); i++) {
+            // For each coordinate in the ship that we are placing,
+            for (int j = 0; j < ships.size(); j++) {
+                // We cross check it against the ships that have been placed's
+                for (int k = 0; k < ships.get(j).getCoordinates().length; k++) {
+                    // coordinates
+
+                    for (int[] z : shipCoords) {
+                        print("\n[");
+                        for (int g : z)
+                            print(g + " ,");
+                        print("]");
+                    }
+
+                    // [0] is the x coordinate
+                    if (shipCoords.get(i)[0] == ships.get(j).getCoordinates()[k][0] && shipCoords.get(i)[1] == ships.get(j).getCoordinates()[k][1]) {
+                        // If the ship we are placing's x & y cord = one of the ship's x & y cord
+                        // Then the validation failed because it is not a valid placement
+
+
+                        return false;
+                    }
+                }
+            }
+        }
+
         return true;
     }
 
 
     public void printBoard() {
-        //prints the board
+
+        print("        BOARD\n");
 
         // Grid
         print("  1 2 3 4 5 6 7 8 9 10\n");
+
 
         for (int i = 0; i < squares.length; i++) {
 
@@ -410,11 +515,16 @@ public class Board {
             // Printing actual grid spaces
             for (int j = 0; j < squares.length; j++) {
 
-                print(squares[i][j] + " ");
+                // Readability
+                if (squares[i][j].equals("0"))
+                    print("_ ");
+                else
+                    print(squares[i][j] + " ");
 
             }
-            System.out.println();
+            print("\n");
         }
+        print("\n");
     }
 
 
@@ -465,6 +575,7 @@ public class Board {
 
 
     public int[][] getIntSquares() {
+        // Returns the board as a 2d int array
 
         int[][] intSquares = new int[squares.length][squares[0].length];
         // Converting the array to an array of Ints
@@ -492,6 +603,11 @@ public class Board {
 
     private void print(int i) {
         System.out.print(i);
+    }
+
+    private void clearConsole() {
+        for (int i = 0; i < 30; i++)
+            print("\n");
     }
 
 

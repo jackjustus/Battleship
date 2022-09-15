@@ -64,7 +64,6 @@ public class Ship {
         this.letter = letter;
 
 
-
         //makes the ships coordinates
         if (isVertical == true) {
             for (int i = 0; i < length; i++) {
@@ -85,6 +84,7 @@ public class Ship {
         for (int i = 0; i < length; i++) {
             coordinates[i][0] = xpos.get(i);
             coordinates[i][1] = ypos.get(i);
+            
         }
 
     }
