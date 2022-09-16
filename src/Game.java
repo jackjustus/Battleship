@@ -49,6 +49,15 @@ public class Game {
 
         while (play) {
             player1.attack(player2.getBoard());
+            player2.attack(player1.getBoard());
+            if(player1.getOtherPlayerSunken() == 5) {
+                System.out.println("Game Over, player 2 wins, lets go, haha!");
+                play = false;
+            }
+            if(player2.getOtherPlayerSunken() == 5) {
+                System.out.println("Game Over, player 1 wins, lets go, haha!");
+                play = false;
+            }
         }
 
 

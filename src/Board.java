@@ -17,7 +17,7 @@ public class Board {
     private int[] shipLengths;
 
     // Num Ships constant
-    static final int NUM_SHIPS = 5;
+    static final int NUM_SHIPS = 1;
 
     Scanner s;
 
@@ -151,6 +151,10 @@ public class Board {
             }
 
         }
+    }
+
+    public int getNumShips(){
+        return NUM_SHIPS;
     }
 
     private void markBoardShipPlacement(Ship s) {
@@ -611,6 +615,7 @@ public class Board {
 
     public int[][] getIntSquares() {
         // Returns the board as a 2d int array
+        //1 = ship at coordinate, -1 hit ship at coordinate, 0 empty water at coordinate (If you are reading this DLIN i love u)
 
         int[][] intSquares = new int[squares.length][squares[0].length];
 

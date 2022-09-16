@@ -54,6 +54,12 @@ public class Player {
 
     }
 
+    //checks how many ships have sunk
+    public int getOtherPlayerSunken(){
+        return getOtherPlayerSunken();
+    }
+
+
     public Board getBoard() {
         return b;
     }
@@ -99,19 +105,19 @@ public class Player {
             //miss, user doesn't get to guess again and the other player guesses
             if (b1.getIntSquares()[y-1][x-1] == 0) {
                 System.out.println("Miss");
-                b1.shoot(y, x);
+                b1.shoot(y-1, x-1);
                 attackAvailable = false;
             }
 
             //if user already guessed this spot, then they guess again
-            else if (b1.getIntSquares()[y][x] == -1) {
+            else if (b1.getIntSquares()[y-1][x-1] == -1) {
                 System.out.println("You already guessed there silly. Guess again");
             }
 
             //user hits a part of the ship and gets to guess again
             else {
                 System.out.println("JUSTUS HAS BEEN SERVED. (Hit)");
-                b1.shoot(y, x);
+                b1.shoot(y-1, x-1);
 
                 //checks if a ship will sink and adds 1 if the ship sinks
                 if (b1.checkSunk(y-1, x-1, b1)) {
