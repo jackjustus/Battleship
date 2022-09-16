@@ -5,6 +5,9 @@ import java.util.Scanner;
 // Written by Jack Justus
 public class Board {
 
+// TODO: Implement
+    String EMPTY_BOARD_SYMBOL = "_";
+
 
     // Class variables
     private String[][] squares;
@@ -183,7 +186,7 @@ public class Board {
 
         while (!inputValid)
             try {
-                print("\nWould you like your ship to be horizontal or vertical?\n");
+                print("\nWould you like your ship to be vertical or horizontal?\n");
                 print("1 = Vertical        2 = Horizontal\n");
                 rotationalValue = s.nextInt();
 
@@ -450,20 +453,13 @@ public class Board {
 //        "the sunk-cost fallacy creeps into a lot of major financial decisions"
         /*
         for (int i = 0; i < shipLength; i++) {
-
             for (Ship ship : ships) {
-
                 for (int k = 0; k < ship.getCoordinates().length; k++) {
-
-
                     if (isVertical == true) {
-
-
                         if (x == ship.getCoordinates()[k][0]) {
                             if (y + i == ship.getCoordinates()[k][1]) {
                                 print("fAILDED");
                                 return false;
-
                             }
                         }
                     } else {
@@ -471,12 +467,9 @@ public class Board {
                             if (y == ship.getCoordinates()[k][1]) {
                                 print("fAILDED");
                                 return false;
-
                             }
                         }
                     }
-
-
                 }
             }
         }
