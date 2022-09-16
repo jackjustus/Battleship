@@ -10,6 +10,7 @@ public class Game {
     public static void main(String[] args) {
         Game g = new Game();
 
+//        Board b = new Board();
         g.play();
     }
 

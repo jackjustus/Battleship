@@ -51,8 +51,6 @@ public class Board {
 
         for (int i = 0; i < NUM_SHIPS; i++) {
 
-            //TODO: Remove this
-            print("FOR LOOP ITERATION " + i + "\n");
 
             // Input validation confirmation
             // Turns false when the input validation fails.
@@ -190,7 +188,7 @@ public class Board {
                 rotationalValue = s.nextInt();
 
                 // Mini input validation
-                if (rotationalValue != 1 || rotationalValue != 2)
+                if (rotationalValue != 1 && rotationalValue != 2)
                     rotationalValueNotValid(false);
 
                 // Checking to see if the input is valid
@@ -500,6 +498,17 @@ public class Board {
             shipCoords.add(s.getCoordinates()[i]);
         }
 
+        // Check if the x and y is within bounds
+        if (x > 9 || y > 9)
+            return false;
+
+        // Check if the ships go off the board
+        if (x > (10 - shipLength) && !isVertical)
+            return false;
+        if (y > (10 - shipLength) && isVertical)
+            return false;
+
+
         for (int i = 0; i < shipCoords.size(); i++) {
             // For each coordinate in the ship that we are placing,
             for (int j = 0; j < ships.size(); j++) {
@@ -611,20 +620,28 @@ public class Board {
         // Returns the board as a 2d int array
 
         int[][] intSquares = new int[squares.length][squares[0].length];
-        // Converting the array to an array of Ints
-        for (int i = 0; i < squares.length; i++) {
-            for (int j = 0; j < squares[i].length; i++) {
 
-                // This statement will fail if the space is not a number
-                try {
-                    intSquares[i][j] = Integer.parseInt(squares[i][j]);
-                } catch (Exception e) {
-                    // This will run if there is a ship at the specified area.
+
+        for (int i = 0; i < squares.length; i++) {
+            for (int j = 0; j < squares[0].length; j++) {
+                // This runs for every slot in the board
+
+                String slot = squares[i][j];
+
+                if (slot.equals("A") || slot.equals("B") || slot.equals("C") || slot.equals("D") || slot.equals("E"))
+                    // There is a ship at the slot if this is true, so we make this spot 1
                     intSquares[i][j] = 1;
-                }
+
+                else if (slot.equals("-1"))
+                    // So yea
+                    intSquares[i][j] = -1;
+
+                else if (slot.equals("_"))
+                    intSquares[i][j] = 0;
 
             }
         }
+
         return intSquares;
     }
 
@@ -641,6 +658,21 @@ public class Board {
     private void clearConsole() {
         for (int i = 0; i < 30; i++)
             print("\n");
+    }
+
+
+    private String safeNextLine(Scanner s) {
+
+        boolean validInput = false;
+        String text;
+        //todo fix
+
+        while (!validInput) {
+            text = s.nextLine();
+
+        }
+
+        return "more text";
     }
 
 

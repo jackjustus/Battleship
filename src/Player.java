@@ -70,6 +70,8 @@ public class Player {
                 //asks for coordinates of a space the player would like to guess and validates their guess
                 //takes y coordinate (letter)
                 System.out.println(">>Enter the letter coordinate for the row you wish to attack");
+                // Scanner Bugfix
+                s.nextLine();
                 y = Translate.convert(s.nextLine());
 
                 while (y == -1) {
@@ -78,15 +80,7 @@ public class Player {
                     y = Translate.convert(s.nextLine());
                 }
 
-                //takes x coordinate (number)
-                System.out.println(">>Enter the number coordinate for the column you wish to attack");
-                x = s.nextInt();
 
-                while (x > 10 || x < 1) {
-                    System.out.println(">>Invalid");
-                    System.out.println(">>Enter the number coordinate for the column you wish to attack");
-                    x = s.nextInt();
-                }
 
 
             //checks if the position the user guessed is a hit, miss, or already guessed
