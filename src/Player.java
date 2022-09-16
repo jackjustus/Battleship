@@ -44,7 +44,7 @@ public class Player {
                 if (s.nextInt() == 5)
                     System.out.println("Ok.");
                 else
-                    System.out.println("Too bad. You're playing with five.");
+                    System.out.println("Too bad. You're playing with " + Board.NUM_SHIPS + "hahahahahahaha got ya");
                 b = new Board();
                 numShipsGood = true;
             } catch (Error e) {
@@ -68,7 +68,19 @@ public class Player {
         //while attackAvailable is true, the player attacks
         while (attackAvailable) {
                 //asks for coordinates of a space the player would like to guess and validates their guess
-                //takes y coordinate (letter)
+
+                //takes x coordinate (number) and validates
+                System.out.println(">>Enter the number coordinate for the column you wish to attack");
+                x = s.nextInt();
+
+                while (x > 10 || x < 1) {
+                    System.out.println(">>Invalid");
+                    System.out.println(">>Enter the number coordinate for the column you wish to attack");
+                    x = s.nextInt();
+                }
+
+
+                //takes y coordinate (letter) and validates
                 System.out.println(">>Enter the letter coordinate for the row you wish to attack");
                 // Scanner Bugfix
                 s.nextLine();
@@ -84,8 +96,8 @@ public class Player {
 
 
             //checks if the position the user guessed is a hit, miss, or already guessed
-            //miss, user doesn't get to guess again
-            if (b1.getIntSquares()[y][x] == 0) {
+            //miss, user doesn't get to guess again and the other player guesses
+            if (b1.getIntSquares()[y-1][x-1] == 0) {
                 System.out.println("Miss");
                 b1.shoot(y, x);
                 attackAvailable = false;
@@ -101,15 +113,13 @@ public class Player {
                 System.out.println("JUSTUS HAS BEEN SERVED. (Hit)");
                 b1.shoot(y, x);
 
-                //checks if a ship will sink
-                if (b1.checkSunk(y, x, b1)) {
+                //checks if a ship will sink and adds 1 if the ship sinks
+                if (b1.checkSunk(y-1, x-1, b1)) {
                     System.out.println("SUNK!");
                     otherPlayerSunken++;
                 }
-//                if (otherPlayerSunken == 5){
-//                    System.out.println("Win");
-//                    attackAvailable = false;
-//                }
+
+                //user guesses again if they didn't miss
                 System.out.println("Guess again");
             }
         }
