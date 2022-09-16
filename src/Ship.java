@@ -84,7 +84,7 @@ public class Ship {
         for (int i = 0; i < length; i++) {
             coordinates[i][0] = xpos.get(i);
             coordinates[i][1] = ypos.get(i);
-            System.out.println(xpos.get(i) + "," + ypos.get(i));
+//            System.out.println(xpos.get(i) + "," + ypos.get(i));
         }
 
     }

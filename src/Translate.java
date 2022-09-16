@@ -11,7 +11,7 @@ public class Translate {
 
     public static int convert(String s) {
         s = s.toUpperCase();
-        System.out.println("Letter is: " + s);
+//        System.out.println("Letter is: " + s);
         for (int i = 0; i < letters.length; i++) {
             if (letters[i].equals(s)) {
                 return (i + 1);

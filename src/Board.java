@@ -51,6 +51,9 @@ public class Board {
 
         for (int i = 0; i < NUM_SHIPS; i++) {
 
+            //TODO: Remove this
+            print("FOR LOOP ITERATION " + i + "\n");
+
             // Input validation confirmation
             // Turns false when the input validation fails.
             boolean inputWorks = false;
@@ -74,6 +77,9 @@ public class Board {
 
                 printBoard();
 
+                // Telling the user how long their ship is
+                print("    SHIP LENGTH: " + shipLength + "\n");
+
 
                 // Finding the rotation of the ships before they choose the coordinates
                 // This needs to be done for the simplicity of input validation
@@ -85,9 +91,11 @@ public class Board {
                     isVertical = true;
                 else if (rotation == 2)
                     isVertical = false;
-                else
-                    // This goes to the top of the while loop because they did not put a valid input
+                else {
+                    // This signals that the input is not valid
+                    inputWorks = false;
                     continue;
+                }
 
 
                 // We now use this method to retrieve the x value of the ship
@@ -107,34 +115,38 @@ public class Board {
 
                 // At this point we can run input validation for all the inputs.
                 //TODO: Make Input Validation
-                if (inputValidation(x, y, isVertical, shipLength))
-                    inputWorks = true;
-                else
-                    continue;
+                if (inputValidation(x, y, isVertical, shipLength)) {
 
 
-                // Giving the player feedback based on all of their input
-                print("You placed a " + verticalString + " length " + shipLength + " ship at " + x + ", " + y + "\n");
+                    // Giving the player feedback based on all of their input
+                    print("You placed a " + verticalString + " length " + shipLength + " ship at " + x + ", " + y + "\n");
 
 
-                // Assigning a letter to the ship based on how many times this loop has run
-                String shipLetter = Translate.convert(i);
+                    // Assigning a letter to the ship based on how many times this loop has run
+                    String shipLetter = Translate.convert(i);
 
 
-                // Actually making the ship object
-                // int length, int x, int y, boolean isVertical, String letter
-                ships.add(new Ship(shipLength, x, y, isVertical, shipLetter));
+                    // Actually making the ship object
+                    // int length, int x, int y, boolean isVertical, String letter
+                    ships.add(new Ship(shipLength, x, y, isVertical, shipLetter));
 
 
-                // Marking on the board where the ship is placed
-                markBoardShipPlacement(ships.get(i));
+                    // Marking on the board where the ship is placed
+                    markBoardShipPlacement(ships.get(i));
 
-                clearConsole();
+                    clearConsole();
 
-                // Differentiating between ship placements
-                print("\n\nShip " + (i + 1) + " Placed.\n\n");
+                    // Differentiating between ship placements
+                    print("\n\nShip " + (i + 1) + " Placed.\n\n");
+
+                } else {
+                    // If input validation fails
+                    inputWorks = false;
+
+                    print("\n\nSorry, but that input is not valid. Please try again.\n\n");
 
 
+                }
             }
 
         }
@@ -173,9 +185,13 @@ public class Board {
 
         while (!inputValid)
             try {
-                print("Would you like your ship to be horizontal or vertical?\n");
+                print("\nWould you like your ship to be horizontal or vertical?\n");
                 print("1 = Vertical        2 = Horizontal\n");
                 rotationalValue = s.nextInt();
+
+                // Mini input validation
+                if (rotationalValue != 1 || rotationalValue != 2)
+                    rotationalValueNotValid(false);
 
                 // Checking to see if the input is valid
                 // If it is valid then the loop will end
@@ -184,11 +200,22 @@ public class Board {
                 inputValid = true;
 
             } catch (Exception e) {
+                rotationalValueNotValid(true);
             }
 //                    e.printStackTrace();
         print("\n");
         return rotationalValue;
 
+
+    }
+
+    private void rotationalValueNotValid(boolean bugFixRequired) {
+
+        print("Sorry, but that is not a valid input. Please enter either [1] or [2].\n");
+
+        // This is sometimes required in order to patch a scanner bug
+        if (bugFixRequired)
+            s.nextLine();
 
     }
 
@@ -423,8 +450,6 @@ public class Board {
 //        "the sunk-cost fallacy creeps into a lot of major financial decisions"
 //        the phenomenon whereby a person is reluctant to abandon a strategy or course of action because they have invested heavily in it, even when it is clear that abandonment would be more beneficial.
 //        "the sunk-cost fallacy creeps into a lot of major financial decisions"
-
-
         /*
         for (int i = 0; i < shipLength; i++) {
 
@@ -482,19 +507,20 @@ public class Board {
                 for (int k = 0; k < ships.get(j).getCoordinates().length; k++) {
                     // coordinates
 
-                    for (int[] z : shipCoords) {
-                        print("\n[");
-                        for (int g : z)
-                            print(g + " ,");
-                        print("]");
-                    }
+                    // Peak Troubleshooting Techniques
+//                    for (int[] z : shipCoords) {
+//                        print("\n[");
+//                        for (int g : z)
+//                            print(g + " ,");
+//                        print("]");
+//                    }
 
                     // [0] is the x coordinate
                     if (shipCoords.get(i)[0] == ships.get(j).getCoordinates()[k][0] && shipCoords.get(i)[1] == ships.get(j).getCoordinates()[k][1]) {
                         // If the ship we are placing's x & y cord = one of the ship's x & y cord
                         // Then the validation failed because it is not a valid placement
 
-                        print("INPUT VALIDATION FAILED\n");
+                        //print("INPUT VALIDATION FAILED\n");
                         return false;
                     }
                 }
@@ -531,7 +557,7 @@ public class Board {
             }
             print("\n");
         }
-        print("\n");
+//        print("\n");
     }
 
 
