@@ -44,6 +44,11 @@ public class Board {
 
         // Initializing Ship objects using player input
         print("Time to make your ships!\n\n");
+
+        //
+        boolean firstRun = true;
+
+
         for (int i = 0; i < NUM_SHIPS; i++) {
 
             // Input validation confirmation
@@ -51,7 +56,7 @@ public class Board {
             boolean inputWorks = false;
 
             // User Clarity
-            boolean firstRun = true;
+
 
             // QOL
             int shipLength = shipLengths[i];
@@ -60,6 +65,8 @@ public class Board {
 
                 if (!firstRun)
                     print("Sorry, your input is not valid. Try again!");
+                else
+                    print("");
 
 
                 // Starts true and gets sets false when it fails
@@ -116,7 +123,7 @@ public class Board {
 
                 // Actually making the ship object
                 // int length, int x, int y, boolean isVertical, String letter
-                ships.add(new Ship(shipLength, x - 1, y - 1, isVertical, shipLetter));
+                ships.add(new Ship(shipLength, x, y, isVertical, shipLetter));
 
 
                 // Marking on the board where the ship is placed
@@ -487,7 +494,7 @@ public class Board {
                         // If the ship we are placing's x & y cord = one of the ship's x & y cord
                         // Then the validation failed because it is not a valid placement
 
-
+                        print("INPUT VALIDATION FAILED\n");
                         return false;
                     }
                 }
