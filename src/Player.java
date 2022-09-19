@@ -55,6 +55,7 @@ public class Player {
     }
 
     //checks how many ships have sunk
+    // TODO: GUYS WHAT THE FRICK IS THIS
     public int getOtherPlayerSunken(){
         return getOtherPlayerSunken();
     }

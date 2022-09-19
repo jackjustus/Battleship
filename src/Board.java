@@ -5,7 +5,7 @@ import java.util.Scanner;
 // Written by Jack Justus
 public class Board {
 
-// TODO: Implement
+    // TODO: Implement
     String EMPTY_BOARD_SYMBOL = "_";
 
 
@@ -153,7 +153,7 @@ public class Board {
         }
     }
 
-    public int getNumShips(){
+    public int getNumShips() {
         return NUM_SHIPS;
     }
 
@@ -249,7 +249,7 @@ public class Board {
                 // Because the player is inputting a letter we need to convert it to a number
                 // Also scanner is being stupid so this is necessary
                 String temp = s.nextLine();
-                temp = s.nextLine();
+                temp = safeNextLine();
 
                 // Putting this in a try catch just in case
                 try {
@@ -659,18 +659,71 @@ public class Board {
     }
 
 
-    private String safeNextLine(Scanner s) {
+    private String safeNextLine() {
+        // The point of this is to use s.nextLine() but not throw an error
+
 
         boolean validInput = false;
-        String text;
+        String text = "";
         //todo fix
 
         while (!validInput) {
-            text = s.nextLine();
+
+            // This try catch catches any errors that scanner throws
+            try {
+
+                text = s.nextLine();
+
+//                // This makes sure the input is not a number
+//                try {
+//
+//                    // If this throws an error, then we know its not a number.
+//                    Integer.parseInt(text);
+//
+//                }
+
+                validInput = true;
+            } catch (Exception e) {
+                print("\nSorry, but that input is not valid. Please try again\n");
+
+
+            }
 
         }
 
-        return "more text";
+        return text;
+    }
+
+    private int safeNextInt() {
+
+        // The point of this is to use s.nextLine() but not throw an error
+
+
+        boolean validInput = false;
+        int text = -999;
+        //todo fix
+
+        while (!validInput) {
+
+            // This try catch catches any errors that scanner throws
+            try {
+
+                text = s.nextInt();
+
+
+                if (text != -999)
+                    validInput = true;
+            } catch (Exception e) {
+                print("\nSorry, but that input is not valid. Please try again\n");
+
+
+            }
+
+        }
+
+        return text;
+
+
     }
 
 
