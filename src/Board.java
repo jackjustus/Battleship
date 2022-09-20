@@ -8,7 +8,6 @@ public class Board {
     // TODO: Implement
 
 
-
     // Class variables
     private String[][] squares;
     private ArrayList<Ship> ships;
@@ -18,7 +17,8 @@ public class Board {
 
     // Constants
     static final int NUM_SHIPS = 1;
-    private final String SQUARE_HIT_SYMBOL = "^";
+    private final String OCEAN_HIT_SYMBOL = "^";
+    private final String SHIP_HIT_SYMBOL = "x";
     private final String EMPTY_BOARD_SYMBOL = "_";
     Scanner s;
 
@@ -564,6 +564,8 @@ public class Board {
                 // Readability
                 if (squares[i][j].equals("0"))
                     print(EMPTY_BOARD_SYMBOL + " ");
+                else if (squares[i][j].equals("-1"))
+                    print(OCEAN_HIT_SYMBOL);
                 else
                     print(squares[i][j] + " ");
 
@@ -573,9 +575,9 @@ public class Board {
     }
 
 
-    public void printBoard(boolean infoBoard){
+    public void printBoard(boolean infoBoard) {
 
-        if(!infoBoard){
+        if (!infoBoard) {
             printBoard();
         }
 
@@ -605,13 +607,13 @@ public class Board {
 //        print("\n");
 
 
-
-
     }
 
 
     public void shoot(int x, int y) {
-        squares[x][y] = SQUARE_HIT_SYMBOL;
+
+        // Here we need to differentiate between a ship being hit or the ocean and mark the board accordingly
+        squares[x][y] = "-1";
     }
 
 
