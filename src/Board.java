@@ -573,6 +573,43 @@ public class Board {
     }
 
 
+    public void printBoard(boolean infoBoard){
+
+        if(!infoBoard){
+            printBoard();
+        }
+
+        print("        BOARD\n");
+
+        // Grid
+        print("  1 2 3 4 5 6 7 8 9 10\n");
+
+
+        for (int i = 0; i < squares.length; i++) {
+
+            // Printing letters
+            print(Translate.convert(i) + " ");
+
+            // Printing actual grid spaces
+            for (int j = 0; j < squares.length; j++) {
+
+                // Readability
+                if (squares[i][j].equals("0"))
+                    print(EMPTY_BOARD_SYMBOL + " ");
+                else if(squares[i][j].equals("1"))
+                    print(squares[i][j] + " ");
+
+            }
+            print("\n");
+        }
+//        print("\n");
+
+
+
+
+    }
+
+
     public void shoot(int x, int y) {
         squares[x][y] = SQUARE_HIT_SYMBOL;
     }
