@@ -31,7 +31,7 @@ public class Player {
         s = new Scanner(System.in);
 
         //Gets players name
-        System.out.println("State your name:");
+        System.out.println("State your name: \n >>");
         name = s.nextLine();
         System.out.println("Excellent.");
 
@@ -44,7 +44,7 @@ public class Player {
                 if (s.nextInt() == 5)
                     System.out.println("Ok.");
                 else
-                    System.out.println("Too bad. You're playing with " + Board.NUM_SHIPS + "hahahahahahaha got ya");
+                    System.out.println("Too bad. You're playing with " + Board.NUM_SHIPS);
                 b = new Board();
                 numShipsGood = true;
             } catch (Error e) {
@@ -58,6 +58,7 @@ public class Player {
     public int getOtherPlayerSunken(){
         return getOtherPlayerSunken();
     }
+
 
 
     public Board getBoard() {
@@ -76,25 +77,25 @@ public class Player {
                 //asks for coordinates of a space the player would like to guess and validates their guess
 
                 //takes x coordinate (number) and validates
-                System.out.println(">>Enter the number coordinate for the column you wish to attack");
+                System.out.println("Hello " + name + ", please enter the number coordinate for the column you wish to attack \n >>");
                 x = s.nextInt();
 
                 while (x > 10 || x < 1) {
                     System.out.println(">>Invalid");
-                    System.out.println(">>Enter the number coordinate for the column you wish to attack");
+                    System.out.println(name + ", enter the number coordinate for the column you wish to attack \n >>");
                     x = s.nextInt();
                 }
 
 
                 //takes y coordinate (letter) and validates
-                System.out.println(">>Enter the letter coordinate for the row you wish to attack");
+                System.out.println(name +  ", enter the letter coordinate for the row you wish to attack \n >>");
                 // Scanner Bugfix
                 s.nextLine();
                 y = Translate.convert(s.nextLine());
 
                 while (y == -1) {
-                    System.out.println(">>Invalid");
-                    System.out.println(">>Enter what letter coordinate you wish to attack");
+                    System.out.println("Invalid");
+                    System.out.println(name +  ", enter the letter coordinate for the row you wish to attack \n >>");
                     y = Translate.convert(s.nextLine());
                 }
 
@@ -111,7 +112,7 @@ public class Player {
 
             //if user already guessed this spot, then they guess again
             else if (b1.getIntSquares()[y-1][x-1] == -1) {
-                System.out.println("You already guessed there silly. Guess again");
+                System.out.println("You already guessed there silly. Guess again \n >>");
             }
 
             //user hits a part of the ship and gets to guess again
