@@ -56,7 +56,7 @@ public class Player {
 
     //checks how many ships have sunk
     public int getOtherPlayerSunken(){
-        return getOtherPlayerSunken();
+        return otherPlayerSunken;
     }
 
 
@@ -127,7 +127,7 @@ public class Player {
                 }
 
                 //user guesses again if they didn't miss
-                System.out.println("Guess again");
+                System.out.println(name + ", guess again");
             }
         }
     }
