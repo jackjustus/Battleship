@@ -21,6 +21,8 @@ public class Translate {
         return -1;
     }
     public static String convert(int s){
-        return letters[(s)];
+
+        return letters[s];
+
     }
 }

@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Board {
 
     // TODO: Implement
-    String EMPTY_BOARD_SYMBOL = "_";
+
 
 
     // Class variables
@@ -16,9 +16,10 @@ public class Board {
     // Initialized in the initializer, same every game
     private int[] shipLengths;
 
-    // Num Ships constant
+    // Constants
     static final int NUM_SHIPS = 1;
-
+    private final String SQUARE_HIT_SYMBOL = "^";
+    private final String EMPTY_BOARD_SYMBOL = "_";
     Scanner s;
 
     // Initializing the Board object, takes in the numShips (constant set in game class)
@@ -69,8 +70,6 @@ public class Board {
 
                 if (!firstRun)
                     print("Sorry, your input is not valid. Try again!");
-                else
-                    print("");
 
 
                 // Starts true and gets sets false when it fails
@@ -115,7 +114,6 @@ public class Board {
                     verticalString = "horizontal";
 
                 // At this point we can run input validation for all the inputs.
-                //TODO: Make Input Validation
                 if (inputValidation(x, y, isVertical, shipLength)) {
 
 
@@ -124,12 +122,15 @@ public class Board {
 
 
                     // Assigning a letter to the ship based on how many times this loop has run
+                    // Also making sure the letter is valid
                     String shipLetter = Translate.convert(i);
 
 
                     // Actually making the ship object
                     // int length, int x, int y, boolean isVertical, String letter
                     ships.add(new Ship(shipLength, x, y, isVertical, shipLetter));
+
+                    print("It is named " + ships.get(i).getName() + "\n");
 
 
                     // Marking on the board where the ship is placed
@@ -151,6 +152,8 @@ public class Board {
             }
 
         }
+        printBoard();
+        clearConsole();
     }
 
     public int getNumShips() {
@@ -192,7 +195,7 @@ public class Board {
             try {
                 print("\nWould you like your ship to be vertical or horizontal?\n");
                 print("1 = Vertical        2 = Horizontal\n");
-                rotationalValue = s.nextInt();
+                rotationalValue = safeNextInt();
 
                 // Mini input validation
                 if (rotationalValue != 1 && rotationalValue != 2)
@@ -201,7 +204,7 @@ public class Board {
                 // Checking to see if the input is valid
                 // If it is valid then the loop will end
                 while (!inputRotationValidation(rotationalValue))
-                    rotationalValue = s.nextInt();
+                    rotationalValue = safeNextInt();
                 inputValid = true;
 
             } catch (Exception e) {
@@ -241,19 +244,23 @@ public class Board {
                 // As well as asking them the x value
                 print("This ship has a length of " + shipLength + "\n");
                 print("Please type the [x] value\n >> ");
-                value = s.nextInt() - 1;
+                value = safeNextInt() - 1;
 
             } else if (typeOfValue.equals("y")) {
 
                 print("Please type the [y] value\n >> ");
                 // Because the player is inputting a letter we need to convert it to a number
                 // Also scanner is being stupid so this is necessary
-                String temp = s.nextLine();
+                String temp = safeNextLine();
                 temp = safeNextLine();
 
                 // Putting this in a try catch just in case
                 try {
                     value = Translate.convert(temp) - 1;
+
+                    // If the input the player entered was invalid
+                    while (value == -1)
+                        value = Translate.convert(temp) - 1;
                 } catch (Exception e) {
                     // e.printStackTrace();
 
@@ -556,19 +563,18 @@ public class Board {
 
                 // Readability
                 if (squares[i][j].equals("0"))
-                    print("_ ");
+                    print(EMPTY_BOARD_SYMBOL + " ");
                 else
                     print(squares[i][j] + " ");
 
             }
             print("\n");
         }
-//        print("\n");
     }
 
 
     public void shoot(int x, int y) {
-        squares[x][y] = "-1";
+        squares[x][y] = SQUARE_HIT_SYMBOL;
     }
 
 
@@ -654,7 +660,7 @@ public class Board {
     }
 
     private void clearConsole() {
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 40; i++)
             print("\n");
     }
 
@@ -715,8 +721,7 @@ public class Board {
                     validInput = true;
             } catch (Exception e) {
                 print("\nSorry, but that input is not valid. Please try again\n");
-
-
+                s.nextLine();
             }
 
         }

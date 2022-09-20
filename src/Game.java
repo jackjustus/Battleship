@@ -8,12 +8,12 @@ public class Game {
     private Scanner r;
 
     public static void main(String[] args) {
-        Board b = new Board();
+//        Board b = new Board();
 
-//        Game g = new Game();
+        Game g = new Game();
 
 //        Board b = new Board();
-//        g.play();
+        g.play();
     }
 
     public Game() {

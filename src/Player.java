@@ -55,7 +55,6 @@ public class Player {
     }
 
     //checks how many ships have sunk
-    // TODO: GUYS WHAT THE FRICK IS THIS
     public int getOtherPlayerSunken(){
         return getOtherPlayerSunken();
     }
@@ -131,5 +130,86 @@ public class Player {
             }
         }
     }
+    private String safeNextLine() {
+        // The point of this is to use s.nextLine() but not throw an error
+
+
+        boolean validInput = false;
+        String text = "";
+        //todo fix
+
+        while (!validInput) {
+
+            // This try catch catches any errors that scanner throws
+            try {
+
+                text = s.nextLine();
+
+//                // This makes sure the input is not a number
+//                try {
+//
+//                    // If this throws an error, then we know its not a number.
+//                    Integer.parseInt(text);
+//
+//                }
+
+                validInput = true;
+            } catch (Exception e) {
+                print("\nSorry, but that input is not valid. Please try again\n");
+
+
+            }
+
+        }
+
+        return text;
+    }
+
+    private int safeNextInt() {
+
+        // The point of this is to use s.nextLine() but not throw an error
+
+
+        boolean validInput = false;
+        int text = -999;
+        //todo fix
+
+        while (!validInput) {
+
+            // This try catch catches any errors that scanner throws
+            try {
+
+                text = s.nextInt();
+
+
+                if (text != -999)
+                    validInput = true;
+            } catch (Exception e) {
+                print("\nSorry, but that input is not valid. Please try again\n");
+                s.nextLine();
+            }
+
+        }
+
+        return text;
+
+
+    }
+
+    // Simplified Printing
+    private void print(String s) {
+        System.out.print(s);
+    }
+
+    private void print(int i) {
+        System.out.print(i);
+    }
+
+    private void clearConsole() {
+        for (int i = 0; i < 40; i++)
+            print("\n");
+    }
+
+
 }
 
