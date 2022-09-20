@@ -596,10 +596,15 @@ public class Board {
             for (int j = 0; j < squares.length; j++) {
 
                 // Readability
-                if (squares[i][j].equals("0"))
-                    print(EMPTY_BOARD_SYMBOL + " ");
-                else if(squares[i][j].equals("1"))
-                    print(squares[i][j] + " ");
+                switch (squares[i][j]) {
+                    case "0", "1":
+                        print(EMPTY_BOARD_SYMBOL + " ");
+                    case "-1":
+                        if (squares[i][j].equals())
+                        print(OCEAN_HIT_SYMBOL + " ");
+
+                }
+
 
             }
             print("\n");
