@@ -532,12 +532,9 @@ public class Board {
         // Start by creating a dummy ship object with an arraylist of the coordinates that it occupies
         // int length, int x, int y, boolean isVertical, String letter
         Ship s = new Ship(shipLength, x, y, isVertical, "Z");
-        ArrayList<int[]> shipCoords = new ArrayList<>();
 
         // Populating the arrayList with the coordinates
-        for (int i = 0; i < s.getCoordinates().length; i++) {
-            shipCoords.add(s.getCoordinates()[i]);
-        }
+        ArrayList<int[]> shipCoords = new ArrayList<>(Arrays.asList(s.getCoordinates()));
 
         // Check if the x and y is within bounds
         if (x > 9 || y > 9)
@@ -550,11 +547,11 @@ public class Board {
             return false;
 
 
-        for (int i = 0; i < shipCoords.size(); i++) {
+        for (int[] shipCoord : shipCoords) {
             // For each coordinate in the ship that we are placing,
-            for (int j = 0; j < ships.size(); j++) {
+            for (Ship ship : ships) {
                 // We cross check it against the ships that have been placed's
-                for (int k = 0; k < ships.get(j).getCoordinates().length; k++) {
+                for (int k = 0; k < ship.getCoordinates().length; k++) {
                     // coordinates
 
                     // Peak Troubleshooting Techniques
@@ -566,7 +563,7 @@ public class Board {
 //                    }
 
                     // [0] is the x coordinate
-                    if (shipCoords.get(i)[0] == ships.get(j).getCoordinates()[k][0] && shipCoords.get(i)[1] == ships.get(j).getCoordinates()[k][1]) {
+                    if (shipCoord[0] == ship.getCoordinates()[k][0] && shipCoord[1] == ship.getCoordinates()[k][1]) {
                         // If the ship we are placing's x & y cord = one of the ship's x & y cord
                         // Then the validation failed because it is not a valid placement
 
@@ -601,21 +598,10 @@ public class Board {
                 // Translating the values into visual objects
 
                 switch (squares[i][j]) {
-
-                    case "0":
-                        print(EMPTY_BOARD_SYMBOL + " ");
-                        break;
-                    case "-1":
-                        print(OCEAN_HIT_SYMBOL + " ");
-                        break;
-                    case "-2":
-                        print(SHIP_HIT_SYMBOL + " ");
-                        break;
-                    default:
-                        print(squares[i][j] + " ");
-                        break;
-
-
+                    case "0" -> print(EMPTY_BOARD_SYMBOL + " ");
+                    case "-1" -> print(OCEAN_HIT_SYMBOL + " ");
+                    case "-2" -> print(SHIP_HIT_SYMBOL + " ");
+                    default -> print(squares[i][j] + " ");
                 }
 
             }
@@ -668,7 +654,7 @@ public class Board {
         // -1 if the ocean was hit; -2 if a ship was hit
 
         // Here we need to differentiate between a ship being hit or the ocean and mark the board accordingly
-        if (squares[x][y] == "0")
+        if (squares[x][y].equals("0"))
             squares[x][y] = "-1";
         else
             // This means a ship was hit, because you cannot shoot at the same place twice
@@ -731,16 +717,15 @@ public class Board {
 
                 String slot = squares[i][j];
 
-                if (slot.equals("A") || slot.equals("B") || slot.equals("C") || slot.equals("D") || slot.equals("E"))
-                    // There is a ship at the slot if this is true, so we make this spot 1
-                    intSquares[i][j] = 1;
-
-                else if (slot.equals("-1"))
-                    // So yea
-                    intSquares[i][j] = -1;
-
-                else if (slot.equals("_"))
-                    intSquares[i][j] = 0;
+                switch (slot) {
+                    case "A", "B", "C", "D", "E" ->
+                        // There is a ship at the slot if this is true, so we make this spot 1
+                            intSquares[i][j] = 1;
+                    case "-1" ->
+                        // So yea
+                            intSquares[i][j] = -1;
+                    case "_" -> intSquares[i][j] = 0;
+                }
 
             }
         }
