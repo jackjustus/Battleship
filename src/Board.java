@@ -624,7 +624,7 @@ public class Board {
             printBoard();
         }
 
-        print("        BOARD\n");
+        print("     ENEMY BOARD\n");
 
         // Grid
         print("  1 2 3 4 5 6 7 8 9 10\n");
