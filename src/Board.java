@@ -624,6 +624,8 @@ public class Board {
             printBoard();
         }
 
+        //THIS PRINTS THE TITLE
+
         print("     ENEMY BOARD\n");
 
         // Grid
