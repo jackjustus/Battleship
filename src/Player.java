@@ -91,11 +91,11 @@ public class Player {
             }
 
 
-                //takes y coordinate (letter) and validates
-                System.out.print(name +  ",enter the [y] coordinate you want to attack \n >>");
-                // Scanner Bugfix
-                s.nextLine();
-                y = Translate.convert(s.nextLine());
+            //takes y coordinate (letter) and validates
+            System.out.print(name + ", enter the [y] coordinate you want to attack \n >>");
+            // Scanner Bugfix
+            s.nextLine();
+            y = Translate.convert(s.nextLine());
 
             while (y == -1) {
                 System.out.println("Invalid");
@@ -125,6 +125,7 @@ public class Player {
                 //checks if a ship will sink and adds 1 if the ship sinks
                 if (b1.checkSunk(y - 1, x - 1)) {
                     System.out.println("SUNK!");
+
                     otherPlayerSunken++;
                 }
 
