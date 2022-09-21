@@ -5,9 +5,6 @@ import java.util.Scanner;
 // Written by Jack Justus
 public class Board {
 
-    // TODO: Implement
-
-
     // Class variables
     private String[][] squares;
     private ArrayList<Ship> ships;
@@ -38,7 +35,8 @@ public class Board {
         ships = new ArrayList<>();
 
         // Initialize Board squares
-        // -1 = hit
+        // -2 = ship hit
+        // -1 = ocean hit
         // 0 = empty
         // 1 = ship
         squares = new String[10][10];
@@ -156,6 +154,44 @@ public class Board {
         clearConsole();
     }
 
+    public Board(boolean debugMode) {
+
+        // This init is so we can test code without having to set up ships
+
+
+        // lengths of the ships
+        shipLengths = new int[]{5, 4, 3, 3, 2};
+
+        // Make scanner
+        s = new Scanner(System.in);
+
+        // Initialize arrayList
+        ships = new ArrayList<>();
+
+        // Initialize Board squares
+        // -1 = hit
+        // 0 = empty
+        // 1 = ship
+        squares = new String[10][10];
+
+        // Making all spaces in the board empty by default
+        for (String[] square : squares) Arrays.fill(square, "0");
+
+
+        // Actually making the ship object
+        // int length, int x, int y, boolean isVertical, String letter
+        ships.add(new Ship(5, 1, 1, true, "A"));
+        ships.add(new Ship(4, 4, 1, true, "B"));
+        ships.add(new Ship(3, 2, 6, false, "C"));
+        ships.add(new Ship(3, 7, 7, true, "D"));
+        ships.add(new Ship(2, 9, 0, true, "E"));
+
+        // Marking on the board where the ship is placed
+        for (Ship s : ships)
+            markBoardShipPlacement(s);
+
+    }
+
     public int getNumShips() {
         return NUM_SHIPS;
     }
@@ -176,6 +212,7 @@ public class Board {
 
             // Setting the position of the ship on the board to the ship's letter
             // The y is vertical so its first
+//            print(x + ", " + y + "\n");
             squares[y][x] = letter;
 
         }
@@ -546,7 +583,7 @@ public class Board {
 
     public void printBoard() {
 
-        print("        BOARD\n");
+        print("  YOUR BOARD\n");
 
         // Grid
         print("  1 2 3 4 5 6 7 8 9 10\n");
@@ -561,13 +598,25 @@ public class Board {
             // Printing actual grid spaces
             for (int j = 0; j < squares.length; j++) {
 
-                // Readability
-                if (squares[i][j].equals("0"))
-                    print(EMPTY_BOARD_SYMBOL + " ");
-                else if (squares[i][j].equals("-1"))
-                    print(OCEAN_HIT_SYMBOL);
-                else
-                    print(squares[i][j] + " ");
+                // Translating the values into visual objects
+
+                switch (squares[i][j]) {
+
+                    case "0":
+                        print(EMPTY_BOARD_SYMBOL + " ");
+                        break;
+                    case "-1":
+                        print(OCEAN_HIT_SYMBOL + " ");
+                        break;
+                    case "-2":
+                        print(SHIP_HIT_SYMBOL + " ");
+                        break;
+                    default:
+                        print(squares[i][j] + " ");
+                        break;
+
+
+                }
 
             }
             print("\n");
@@ -600,8 +649,8 @@ public class Board {
                     case "0", "1":
                         print(EMPTY_BOARD_SYMBOL + " ");
                     case "-1":
-                        if (squares[i][j].equals())
-                        print(OCEAN_HIT_SYMBOL + " ");
+                        if (squares[i][j].equals("-1"))
+                            print(OCEAN_HIT_SYMBOL + " ");
 
                 }
 
@@ -616,9 +665,15 @@ public class Board {
 
 
     public void shoot(int x, int y) {
+        // -1 if the ocean was hit; -2 if a ship was hit
 
         // Here we need to differentiate between a ship being hit or the ocean and mark the board accordingly
-        squares[x][y] = "-1";
+        if (squares[x][y] == "0")
+            squares[x][y] = "-1";
+        else
+            // This means a ship was hit, because you cannot shoot at the same place twice
+            squares[x][y] = "-2";
+
     }
 
 

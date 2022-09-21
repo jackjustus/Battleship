@@ -31,7 +31,7 @@ public class Player {
         s = new Scanner(System.in);
 
         //Gets players name
-        System.out.println("State your name: \n >>");
+        System.out.print("State your name: \n >> ");
         name = s.nextLine();
         System.out.println("Excellent.");
 
@@ -45,7 +45,8 @@ public class Player {
                     System.out.println("Ok.");
                 else
                     System.out.println("Too bad. You're playing with " + Board.NUM_SHIPS);
-                b = new Board();
+                //TODO: REMOVE THIS DEBUG MODE WHEN FINISHED
+                b = new Board(true);
                 numShipsGood = true;
             } catch (Error e) {
                 System.out.println("Need to input int!");
@@ -77,7 +78,7 @@ public class Player {
                 //asks for coordinates of a space the player would like to guess and validates their guess
 
                 //takes x coordinate (number) and validates
-                System.out.println("Hello " + name + ", please enter the number coordinate for the column you wish to attack \n >>");
+                System.out.print("Hello " + name + ", please enter the number coordinate for the column you wish to attack \n >> ");
                 x = s.nextInt();
 
                 while (x > 10 || x < 1) {

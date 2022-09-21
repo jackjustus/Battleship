@@ -28,7 +28,7 @@ public class Game {
         System.out.println("Hello. Welcome to Battleship! Let's get this work!");
 
         while (userint != 1 && userint != 2) {
-            System.out.println("Would you like to play vs. a computer (1) or player (2)?");
+            System.out.println("Would you like to play vs. a computer [1] or player [2]?");
             userint = r.nextInt();
         }
 
