@@ -78,25 +78,25 @@ public class Player {
                 //asks for coordinates of a space the player would like to guess and validates their guess
 
                 //takes x coordinate (number) and validates
-                System.out.print("Hello " + name + ", please enter the number coordinate for the column you wish to attack \n >> ");
+                System.out.print("Hello " + name + ", enter the [x] coordinate you want to attack \n >> ");
                 x = s.nextInt();
 
                 while (x > 10 || x < 1) {
                     System.out.println(">>Invalid");
-                    System.out.println(name + ", enter the number coordinate for the column you wish to attack \n >>");
+                    System.out.println(name + ", enter the [x] coordinate you want to attack \n >> ");
                     x = s.nextInt();
                 }
 
 
                 //takes y coordinate (letter) and validates
-                System.out.println(name +  ", enter the letter coordinate for the row you wish to attack \n >>");
+                System.out.print(name +  ",enter the [y] coordinate you want to attack \n >>");
                 // Scanner Bugfix
                 s.nextLine();
                 y = Translate.convert(s.nextLine());
 
                 while (y == -1) {
                     System.out.println("Invalid");
-                    System.out.println(name +  ", enter the letter coordinate for the row you wish to attack \n >>");
+                    System.out.println(name +  ", enter the [y] coordinate you want to attack \n >>");
                     y = Translate.convert(s.nextLine());
                 }
 
@@ -106,7 +106,7 @@ public class Player {
             //checks if the position the user guessed is a hit, miss, or already guessed
             //miss, user doesn't get to guess again and the other player guesses
             if (b1.getIntSquares()[y-1][x-1] == 0) {
-                System.out.println("Miss");
+                System.out.println("Your shot missed");
                 b1.shoot(y-1, x-1);
                 attackAvailable = false;
             }
@@ -130,6 +130,16 @@ public class Player {
                 //user guesses again if they didn't miss
                 System.out.println(name + ", guess again");
             }
+
+            // Once the user has been informed about the result of their action, we ask them to hand the computer over and press enter to confirm the other player is ready
+            System.out.println("\n\nPlease press enter when you are ready to clear the console");
+            s.nextLine();
+            b.clearConsole();
+
+            System.out.println("Press enter when you are ready to show your information");
+            s.nextLine();
+            s.nextLine();
+
         }
     }
     private String safeNextLine() {

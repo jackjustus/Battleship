@@ -580,7 +580,7 @@ public class Board {
 
     public void printBoard() {
 
-        print("  YOUR BOARD\n");
+        print("      YOUR BOARD\n");
 
         // Grid
         print("  1 2 3 4 5 6 7 8 9 10\n");
@@ -743,7 +743,7 @@ public class Board {
         System.out.print(i);
     }
 
-    private void clearConsole() {
+    public void clearConsole() {
         for (int i = 0; i < 40; i++)
             print("\n");
     }

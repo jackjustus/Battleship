@@ -28,12 +28,13 @@ public class Game {
         System.out.println("Hello. Welcome to Battleship! Let's get this work!");
 
         while (userint != 1 && userint != 2) {
-            System.out.println("Would you like to play vs. a computer [1] or player [2]?");
+            System.out.print("Would you like to play vs. a computer [1] or player [2]?\n >> ");
             userint = r.nextInt();
         }
 
 //        if(userint == 1)
         System.out.println("Player 1, press enter if you are ready!");
+        r.nextLine();
         r.nextLine();
         Player player1 = new Player();
         System.out.println("Player 2, press enter if you are ready!");
