@@ -133,15 +133,19 @@ public class Player {
                 System.out.println(name + ", guess again");
             }
 
-            // Once the user has been informed about the result of their action, we ask them to hand the computer over and press enter to confirm the other player is ready
-            System.out.println("\n\nPlease press enter when you are ready to clear the console");
-            s.nextLine();
-            b.clearConsole();
+            // This clears the screen to allow for a clean handoff of the device
+            if (!attackAvailable) {
 
-            System.out.println("Press enter when you are ready to show your information");
-            s.nextLine();
-            s.nextLine();
+                // Once the user has been informed about the result of their action, we ask them to hand the computer over and press enter to confirm the other player is ready
+                System.out.println(name + " \n\nPlease press enter when you are ready to clear the console");
+                s.nextLine();
+                b.clearConsole();
 
+                System.out.println(name + ", press enter when you are ready to show your information");
+                s.nextLine();
+                s.nextLine();
+
+            }
         }
     }
 
