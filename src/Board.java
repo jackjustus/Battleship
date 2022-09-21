@@ -598,10 +598,18 @@ public class Board {
                 // Translating the values into visual objects
 
                 switch (squares[i][j]) {
-                    case "0" -> print(EMPTY_BOARD_SYMBOL + " ");
-                    case "-1" -> print(OCEAN_HIT_SYMBOL + " ");
-                    case "-2" -> print(SHIP_HIT_SYMBOL + " ");
-                    default -> print(squares[i][j] + " ");
+                    case "0":
+                        print(EMPTY_BOARD_SYMBOL + " ");
+                        break;
+                    case "-1":
+                        print(OCEAN_HIT_SYMBOL + " ");
+                        break;
+                    case "-2":
+                        print(SHIP_HIT_SYMBOL + " ");
+                        break;
+                    default:
+                        print(squares[i][j] + " ");
+                        break;
                 }
 
             }
@@ -632,12 +640,10 @@ public class Board {
 
                 // Readability
                 switch (squares[i][j]) {
-                    case "0", "1":
-                        print(EMPTY_BOARD_SYMBOL + " ");
-                    case "-1":
-                        if (squares[i][j].equals("-1"))
-                            print(OCEAN_HIT_SYMBOL + " ");
-
+                    case "0", "1" -> print(EMPTY_BOARD_SYMBOL + " ");
+                    case "-1" -> print(OCEAN_HIT_SYMBOL + " ");
+                    case "-2" -> print(SHIP_HIT_SYMBOL + " ");
+                    default -> print(EMPTY_BOARD_SYMBOL + " ");
                 }
 
 
@@ -664,42 +670,73 @@ public class Board {
 
 
     //checks to see if a ship has been sunk
-    public boolean checkSunk(int x, int y, Board b1) {
-
-        //defines which ship was hit
-        int hitShip = 0;
+    public boolean checkSunk(int x, int y) {
 
 
-        //figures out what ship was hit
-        for (int i = 0; i < ships.size(); i++) {
-            for (int j = 0; j < ships.get(i).getCoordinates().length; j++) {
+        // Return true if a ship sunk and false if it didn't
 
-                if (ships.get(i).getCoordinates()[j][0] == x) {
-                    if (ships.get(i).getCoordinates()[j][1] == y) {
-                        hitShip = i;
-                    }
+
+        // First thing is to check if the place that the player fired at had a ship on it - and what that ship is
+
+
+        for (Ship s : ships) {
+            for (int[] coords : s.getCoordinates()) {
+                if (coords[0] == x && coords[1] == y) {
+                    // This means that the coordinate the player choose had a ship at it
+                    // We now need to check if any more of the ship is on the board
+                    String shipLetter = s.getLetter();
+                    boolean isOnBoard = false;
+
+                    for (int i = 0; i < squares.length; i++)
+                        for (int j = 0; j < squares[i].length; j++)
+                            if (squares[i][j].equals(shipLetter)) {
+                                isOnBoard = true;
+
+                            }
+
+                    // Now if isOnBoard is still false, we know that the ship was sunk
+                    if (!isOnBoard)
+                        System.out.println("You sunk the " + s.getName());
+                    return !isOnBoard;
                 }
-
             }
         }
+        return false;
 
 
-        //checks to see if said ship is completely sunk
-        int shipSlots = ships.get(hitShip).getCoordinates().length;
-        int count = 0;
-        for (int i = 0; i < shipSlots; i++) {
-            if (b1.getIntSquares()[ships.get(hitShip).getCoordinates()[i][0]][ships.get(hitShip).getCoordinates()[i][1]] == -1) {
-                count++;
-            }
-        }
-
-
-        if (count == shipSlots) {
-            System.out.println("You sunk the " + ships.get(hitShip).getName() + "!");
-            return true;
-        } else {
-            return false;
-        }
+//        //defines which ship was hit
+//        int hitShip = 0;
+//
+//        //figures out what ship was hit
+//        for (int i = 0; i < ships.size(); i++) {
+//            for (int j = 0; j < ships.get(i).getCoordinates().length; j++) {
+//
+//                if (ships.get(i).getCoordinates()[j][0] == x) {
+//                    if (ships.get(i).getCoordinates()[j][1] == y) {
+//                        hitShip = i;
+//                    }
+//                }
+//
+//            }
+//        }
+//
+//
+//        //checks to see if said ship is completely sunk
+//        int shipSlots = ships.get(hitShip).getCoordinates().length;
+//        int count = 0;
+//        for (int i = 0; i < shipSlots; i++) {
+//            if (b1.getIntSquares()[ships.get(hitShip).getCoordinates()[i][0]][ships.get(hitShip).getCoordinates()[i][1]].equals("-2")) {
+//                count++;
+//            }
+//        }
+//
+//
+//        if (count == shipSlots) {
+//            System.out.println("You sunk the " + ships.get(hitShip).getName() + "!");
+//            return true;
+//        } else {
+//            return false;
+//        }
 
     }
 

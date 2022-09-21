@@ -1,5 +1,6 @@
 import java.sql.SQLOutput;
 import java.util.Scanner;
+
 public class Player {
 
 
@@ -56,10 +57,9 @@ public class Player {
     }
 
     //checks how many ships have sunk
-    public int getOtherPlayerSunken(){
+    public int getOtherPlayerSunken() {
         return otherPlayerSunken;
     }
-
 
 
     public Board getBoard() {
@@ -75,17 +75,20 @@ public class Player {
 
         //while attackAvailable is true, the player attacks
         while (attackAvailable) {
-                //asks for coordinates of a space the player would like to guess and validates their guess
+            //asks for coordinates of a space the player would like to guess and validates their guess
+            print("\n\n\n");
+            b.printBoard(true);
 
-                //takes x coordinate (number) and validates
-                System.out.print("Hello " + name + ", enter the [x] coordinate you want to attack \n >> ");
-                x = s.nextInt();
 
-                while (x > 10 || x < 1) {
-                    System.out.println(">>Invalid");
-                    System.out.println(name + ", enter the [x] coordinate you want to attack \n >> ");
-                    x = s.nextInt();
-                }
+            //takes x coordinate (number) and validates
+            System.out.print("Hello " + name + ", enter the [x] coordinate you want to attack \n >> ");
+            x = safeNextInt();
+
+            while (x > 10 || x < 1) {
+                System.out.println(">>Invalid");
+                System.out.println(name + ", enter the [x] coordinate you want to attack \n >> ");
+                x = safeNextInt();
+            }
 
 
                 //takes y coordinate (letter) and validates
@@ -94,35 +97,33 @@ public class Player {
                 s.nextLine();
                 y = Translate.convert(s.nextLine());
 
-                while (y == -1) {
-                    System.out.println("Invalid");
-                    System.out.println(name +  ", enter the [y] coordinate you want to attack \n >>");
-                    y = Translate.convert(s.nextLine());
-                }
-
-
+            while (y == -1) {
+                System.out.println("Invalid");
+                System.out.println(name + ", enter the [y] coordinate you want to attack \n >>");
+                y = Translate.convert(s.nextLine());
+            }
 
 
             //checks if the position the user guessed is a hit, miss, or already guessed
             //miss, user doesn't get to guess again and the other player guesses
-            if (b1.getIntSquares()[y-1][x-1] == 0) {
+            if (b1.getIntSquares()[y - 1][x - 1] == 0) {
                 System.out.println("Your shot missed");
-                b1.shoot(y-1, x-1);
+                b1.shoot(y - 1, x - 1);
                 attackAvailable = false;
             }
 
             //if user already guessed this spot, then they guess again
-            else if (b1.getIntSquares()[y-1][x-1] == -1) {
+            else if (b1.getIntSquares()[y - 1][x - 1] == -1) {
                 System.out.println("You already guessed there silly. Guess again \n >>");
             }
 
             //user hits a part of the ship and gets to guess again
             else {
                 System.out.println("JUSTUS HAS BEEN SERVED. (Hit)");
-                b1.shoot(y-1, x-1);
+                b1.shoot(y - 1, x - 1);
 
                 //checks if a ship will sink and adds 1 if the ship sinks
-                if (b1.checkSunk(y-1, x-1, b1)) {
+                if (b1.checkSunk(y - 1, x - 1)) {
                     System.out.println("SUNK!");
                     otherPlayerSunken++;
                 }
@@ -142,6 +143,7 @@ public class Player {
 
         }
     }
+
     private String safeNextLine() {
         // The point of this is to use s.nextLine() but not throw an error
 
