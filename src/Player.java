@@ -42,7 +42,7 @@ public class Player {
         while (!numShipsGood) {
             try {
                 System.out.println("How many ships would you like to play with?");
-                if (s.nextInt() == 5)
+                if (safeNextInt() == 5)
                     System.out.println("Ok.");
                 else
                     System.out.println("Too bad. You're playing with " + Board.NUM_SHIPS);
@@ -77,7 +77,7 @@ public class Player {
         while (attackAvailable) {
             //asks for coordinates of a space the player would like to guess and validates their guess
             print("\n\n\n");
-            b.printBoard(true);
+            b1.printBoard(true);
 
 
             //takes x coordinate (number) and validates
@@ -92,29 +92,30 @@ public class Player {
 
 
             //takes y coordinate (letter) and validates
-            System.out.print(name + ", enter the [y] coordinate you want to attack \n >>");
+            System.out.print(name + ", enter the [y] coordinate you want to attack \n >> ");
             // Scanner Bugfix
             s.nextLine();
             y = Translate.convert(s.nextLine());
 
             while (y == -1) {
                 System.out.println("Invalid");
-                System.out.println(name + ", enter the [y] coordinate you want to attack \n >>");
+                System.out.println(name + ", enter the [y] coordinate you want to attack \n >> ");
                 y = Translate.convert(s.nextLine());
             }
 
+            int selectedSpot = b1.getIntSquares()[y - 1][x - 1];
 
             //checks if the position the user guessed is a hit, miss, or already guessed
             //miss, user doesn't get to guess again and the other player guesses
-            if (b1.getIntSquares()[y - 1][x - 1] == 0) {
+            if (selectedSpot == 0) {
                 System.out.println("Your shot missed");
                 b1.shoot(y - 1, x - 1);
                 attackAvailable = false;
             }
 
             //if user already guessed this spot, then they guess again
-            else if (b1.getIntSquares()[y - 1][x - 1] == -1) {
-                System.out.println("You already guessed there silly. Guess again \n >>");
+            else if (selectedSpot == -1 || selectedSpot == -2) {
+                System.out.println("You already guessed there silly. Guess again.");
             }
 
             //user hits a part of the ship and gets to guess again
@@ -137,11 +138,11 @@ public class Player {
             if (!attackAvailable) {
 
                 // Once the user has been informed about the result of their action, we ask them to hand the computer over and press enter to confirm the other player is ready
-                System.out.println(name + " \n\nPlease press enter when you are ready to clear the console");
+                System.out.println("\n\nPlease press [Enter] when you are ready to clear the console");
                 s.nextLine();
                 b.clearConsole();
 
-                System.out.println(name + ", press enter when you are ready to show your information");
+                System.out.println("\n\n Press [Enter] twice when you are ready to show your information");
                 s.nextLine();
                 s.nextLine();
 

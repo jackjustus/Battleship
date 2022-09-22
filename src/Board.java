@@ -679,10 +679,17 @@ public class Board {
 
         // First thing is to check if the place that the player fired at had a ship on it - and what that ship is
 
+        print("Running checkSunk at " + x + ", " + y);
 
         for (Ship s : ships) {
             for (int[] coords : s.getCoordinates()) {
+
+                print("");
+
                 if (coords[0] == x && coords[1] == y) {
+
+                    print("Ship Found at coordinate [" + x + ", " + y + "]");
+
                     // This means that the coordinate the player choose had a ship at it
                     // We now need to check if any more of the ship is on the board
                     String shipLetter = s.getLetter();
@@ -759,10 +766,10 @@ public class Board {
                     case "A", "B", "C", "D", "E" ->
                         // There is a ship at the slot if this is true, so we make this spot 1
                             intSquares[i][j] = 1;
-                    case "-1" ->
-                        // So yea
-                            intSquares[i][j] = -1;
-                    case "_" -> intSquares[i][j] = 0;
+                    case "-1" -> intSquares[i][j] = -1;
+                    case "-2" -> intSquares[i][j] = -2;
+                    case "0", "_" -> intSquares[i][j] = 0;
+                    default -> print("\n\nERROR IN getIntSquares(). PLEASE CHECK AND UPDATE THE METHOD");
                 }
 
             }
