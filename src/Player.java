@@ -79,6 +79,12 @@ public class Player {
             print("\n\n\n");
             b1.printBoard(true);
 
+            // This makes sure that the game is not over before asking the user for input
+            if (otherPlayerSunken == Board.NUM_SHIPS) {
+                attackAvailable = false;
+                continue;
+            }
+
 
             //takes x coordinate (number) and validates
             System.out.print("Hello " + name + ", enter the [x] coordinate you want to attack \n >> ");
@@ -125,13 +131,12 @@ public class Player {
 
                 //checks if a ship will sink and adds 1 if the ship sinks
                 if (b1.checkSunk(y - 1, x - 1)) {
-                    System.out.println("SUNK!");
-
                     otherPlayerSunken++;
+                    System.out.println("\n\nYou sunk a ship! [" + otherPlayerSunken + " / " + Board.NUM_SHIPS + "]\n\n");
                 }
 
                 //user guesses again if they didn't miss
-                System.out.println(name + ", guess again");
+                System.out.println(name + ", Guess again");
             }
 
             // This clears the screen to allow for a clean handoff of the device

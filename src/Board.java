@@ -13,7 +13,7 @@ public class Board {
     private int[] shipLengths;
 
     // Constants
-    static final int NUM_SHIPS = 1;
+    static final int NUM_SHIPS = 5;
     private final String OCEAN_HIT_SYMBOL = "^";
     private final String SHIP_HIT_SYMBOL = "x";
     private final String EMPTY_BOARD_SYMBOL = "_";
@@ -180,11 +180,11 @@ public class Board {
 
         // Actually making the ship object
         // int length, int x, int y, boolean isVertical, String letter
-        ships.add(new Ship(5, 1, 1, true, "A"));
-        ships.add(new Ship(4, 4, 1, true, "B"));
-        ships.add(new Ship(3, 2, 6, false, "C"));
-        ships.add(new Ship(3, 7, 7, true, "D"));
-        ships.add(new Ship(2, 9, 0, true, "E"));
+        ships.add(new Ship(5, 0, 0, true, "A"));
+        ships.add(new Ship(4, 1, 0, true, "B"));
+        ships.add(new Ship(3, 2, 0, true, "C"));
+        ships.add(new Ship(3, 3, 0, true, "D"));
+        ships.add(new Ship(2, 4, 0, true, "E"));
 
         // Marking on the board where the ship is placed
         for (Ship s : ships)
@@ -615,6 +615,17 @@ public class Board {
             }
             print("\n");
         }
+
+
+        // Board Key
+        print(EMPTY_BOARD_SYMBOL + ": - Nothing\n");
+        print(OCEAN_HIT_SYMBOL + ": - Ocean Hit\n");
+        print(SHIP_HIT_SYMBOL + ": - Ship Hit\n");
+
+        // Ships
+        for (int i = 0; i < NUM_SHIPS; i++) {
+            print(Translate.convert(i) + ": - " + ships.get(i).getName() + "\n");
+        }
     }
 
 
@@ -679,16 +690,18 @@ public class Board {
 
         // First thing is to check if the place that the player fired at had a ship on it - and what that ship is
 
-        print("Running checkSunk at " + x + ", " + y);
+        // You can see my pain troubleshooting this method from the number of print statements
+
+//        print("Running checkSunk at " + x + ", " + y);
 
         for (Ship s : ships) {
             for (int[] coords : s.getCoordinates()) {
 
-                print("");
+//                print("Checking coordinate [" + coords[1] + ", " + coords[0] + "]");
 
-                if (coords[0] == x && coords[1] == y) {
+                if (coords[1] == x && coords[0] == y) {
 
-                    print("Ship Found at coordinate [" + x + ", " + y + "]");
+//                    print("Ship Found at coordinate [" + x + ", " + y + "]");
 
                     // This means that the coordinate the player choose had a ship at it
                     // We now need to check if any more of the ship is on the board
