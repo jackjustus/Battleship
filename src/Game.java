@@ -4,7 +4,6 @@ public class Game {
 
 
     private boolean play;
-    private int[] spacesUsed;
     private Scanner r;
 
     public static void main(String[] args) {
@@ -24,8 +23,8 @@ public class Game {
     public void play() {
 
         r = new Scanner(System.in);
-        int userint = 0;
-        System.out.println("Hello. Welcome to Battleship! Let's get this work!");
+
+        printGameStart();
 
 //        while (userint != 1 && userint != 2) {
 //            System.out.print("Would you like to play vs. a computer [1] or player [2]?\n >> ");
@@ -34,11 +33,11 @@ public class Game {
 
 //        if(userint == 1)\
         System.out.println("Player 1, press enter if you are ready!");
-        r.nextLine();
-        r.nextLine();
+        safeNextLine();
+        safeNextLine();
         Player player1 = new Player();
         System.out.println("Player 2, press enter if you are ready!");
-        r.nextLine();
+        safeNextLine();
         Player player2 = new Player();
 
 //        }

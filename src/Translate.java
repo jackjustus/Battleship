@@ -1,7 +1,7 @@
 public class Translate {
     // All parts of this class are static, so you don't have to create an object to use it
     static private String[] letters = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
-    ;
+
 
     //class for translating letter to number index
 

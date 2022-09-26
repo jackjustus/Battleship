@@ -28,7 +28,7 @@ public class Ship {
     public Ship(int length, int x, int y, boolean isVertical, String letter) {
 
         // Inializing the Array List
-        names = new ArrayList<String>() {{
+        names = new ArrayList<>() {{
 
             add("USS Lin");
             add("USS Justus");
@@ -48,15 +48,15 @@ public class Ship {
             add("Unsinkable II");
             add("Usain Boat");
             add("The Codfather");
-            add("Liquid Assest");
+            add("Liquid Asset");
 
 
         }};
         int nameNum = ((int) (Math.random() * 19));
         name = names.get(nameNum);
         names.remove(nameNum);
-        xpos = new ArrayList<Integer>();
-        ypos = new ArrayList<Integer>();
+        xpos = new ArrayList<>();
+        ypos = new ArrayList<>();
 
 
         // Initializing class variables
@@ -65,7 +65,7 @@ public class Ship {
 
 
         //makes the ships coordinates
-        if (isVertical == true) {
+        if (isVertical) {
             for (int i = 0; i < length; i++) {
                 xpos.add(x);
                 ypos.add(y + i);

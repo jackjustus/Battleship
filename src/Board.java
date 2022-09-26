@@ -149,6 +149,7 @@ public class Board {
         clearConsole();
     }
 
+
     public Board(boolean debugMode) {
 
         // This init is so we can test code without having to set up ships
@@ -744,6 +745,7 @@ public class Board {
 //        } else {
 //            return false;
 //        }
+
 
     }
 
