@@ -101,8 +101,8 @@ public class Player {
             System.out.print(name + ", enter the [y] coordinate you want to attack \n >> ");
 
             // Scanner Bugfix
-            s.nextLine();
-            y = Translate.convert(s.nextLine());
+            safeNextLine();
+            y = Translate.convert(safeNextLine());
 
             while (y == -1) {
                 System.out.println("Invalid");
@@ -128,6 +128,7 @@ public class Player {
             //user hits a part of the ship and gets to guess again
             else {
                 System.out.println("JUSTUS HAS BEEN SERVED. (Hit)");
+                System.out.println();
                 b1.shoot(y - 1, x - 1);
 
                 //checks if a ship will sink and adds 1 if the ship sinks

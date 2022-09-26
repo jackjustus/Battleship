@@ -40,7 +40,7 @@ public class Ship {
             add("The Battle Bus");
             add("Bezos Superyacht");
             add("USSR Aquaholic");
-            add("Row vs. Wade");
+            add("Row vs. Wave");
             add("The Crazy Oar-deal");
             add("The Bull ship");
             add("Tax Sea-vasion");

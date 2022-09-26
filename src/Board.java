@@ -13,7 +13,7 @@ public class Board {
     private int[] shipLengths;
 
     // Constants
-    static final int NUM_SHIPS = 5;
+    static final int NUM_SHIPS = 1;
     private final String OCEAN_HIT_SYMBOL = "^";
     private final String SHIP_HIT_SYMBOL = "x";
     private final String EMPTY_BOARD_SYMBOL = "_";
@@ -703,14 +703,18 @@ public class Board {
                             }
 
                     // Now if isOnBoard is still false, we know that the ship was sunk
-                    if (!isOnBoard)
+                    if (!isOnBoard) {
                         System.out.println("You sunk the " + s.getName());
-                    return !isOnBoard;
+                        System.out.println();
+                        System.out.println("Press enter to continue");
+                        safeNextLine();
+                        return !isOnBoard;
+                    }
                 }
             }
+
         }
         return false;
-
 
 //        //defines which ship was hit
 //        int hitShip = 0;
