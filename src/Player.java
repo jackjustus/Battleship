@@ -33,7 +33,7 @@ public class Player {
 
         //Gets players name
         System.out.print("State your name: \n >> ");
-        name = s.nextLine();
+        name = safeNextLine();
         System.out.println("Excellent.");
 
         //just for jokes
@@ -107,7 +107,7 @@ public class Player {
             while (y == -1) {
                 System.out.println("Invalid");
                 System.out.println(name + ", enter the [y] coordinate you want to attack \n >> ");
-                y = Translate.convert(s.nextLine());
+                y = Translate.convert(safeNextLine());
             }
 
             int selectedSpot = b1.getIntSquares()[y - 1][x - 1];
@@ -145,12 +145,12 @@ public class Player {
 
                 // Once the user has been informed about the result of their action, we ask them to hand the computer over and press enter to confirm the other player is ready
                 System.out.println("\n\nPlease press [Enter] when you are ready to clear the console");
-                s.nextLine();
+                safeNextLine();
                 b.clearConsole();
 
                 System.out.println("\n\n Press [Enter] twice when you are ready to show your information");
-                s.nextLine();
-                s.nextLine();
+                safeNextLine();
+                safeNextLine();
 
             }
         }
