@@ -27,12 +27,12 @@ public class Game {
         int userint = 0;
         System.out.println("Hello. Welcome to Battleship! Let's get this work!");
 
-        while (userint != 1 && userint != 2) {
-            System.out.print("Would you like to play vs. a computer [1] or player [2]?\n >> ");
-            userint = r.nextInt();
-        }
+//        while (userint != 1 && userint != 2) {
+//            System.out.print("Would you like to play vs. a computer [1] or player [2]?\n >> ");
+//            userint = r.nextInt();
+//        }
 
-//        if(userint == 1)
+//        if(userint == 1)\
         System.out.println("Player 1, press enter if you are ready!");
         r.nextLine();
         r.nextLine();
@@ -52,16 +52,135 @@ public class Game {
 
         while (play) {
             player1.attack(player2.getBoard());
-            player2.attack(player1.getBoard());
+
             if (player1.getOtherPlayerSunken() == Board.NUM_SHIPS) {
-                System.out.println("Game Over, player 2 wins, lets go, haha!");
+                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                printGameOver();
                 play = false;
+                continue;
             }
+            player2.attack(player1.getBoard());
+
             if (player2.getOtherPlayerSunken() == Board.NUM_SHIPS) {
-                System.out.println("Game Over, player 1 wins, lets go, haha!");
+                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                printGameOver();
                 play = false;
             }
         }
+
+
+    }
+
+    private void printGameStart() {
+        System.out.println("░██╗░░░░░░░██╗███████╗██╗░░░░░░█████╗░░█████╗░███╗░░░███╗███████╗  ████████╗░█████╗░\n" +
+                "░██║░░██╗░░██║██╔════╝██║░░░░░██╔══██╗██╔══██╗████╗░████║██╔════╝  ╚══██╔══╝██╔══██╗\n" +
+                "░╚██╗████╗██╔╝█████╗░░██║░░░░░██║░░╚═╝██║░░██║██╔████╔██║█████╗░░  ░░░██║░░░██║░░██║\n" +
+                "░░████╔═████║░██╔══╝░░██║░░░░░██║░░██╗██║░░██║██║╚██╔╝██║██╔══╝░░  ░░░██║░░░██║░░██║\n" +
+                "░░╚██╔╝░╚██╔╝░███████╗███████╗╚█████╔╝╚█████╔╝██║░╚═╝░██║███████╗  ░░░██║░░░╚█████╔╝\n" +
+                "░░░╚═╝░░░╚═╝░░╚══════╝╚══════╝░╚════╝░░╚════╝░╚═╝░░░░░╚═╝╚══════╝  ░░░╚═╝░░░░╚════╝░\n" +
+                "\n" +
+                "██████╗░░█████╗░████████╗████████╗██╗░░░░░███████╗  ░██████╗██╗░░██╗██╗██████╗░\n" +
+                "██╔══██╗██╔══██╗╚══██╔══╝╚══██╔══╝██║░░░░░██╔════╝  ██╔════╝██║░░██║██║██╔══██╗\n" +
+                "██████╦╝███████║░░░██║░░░░░░██║░░░██║░░░░░█████╗░░  ╚█████╗░███████║██║██████╔╝\n" +
+                "██╔══██╗██╔══██║░░░██║░░░░░░██║░░░██║░░░░░██╔══╝░░  ░╚═══██╗██╔══██║██║██╔═══╝░\n" +
+                "██████╦╝██║░░██║░░░██║░░░░░░██║░░░███████╗███████╗  ██████╔╝██║░░██║██║██║░░░░░\n" +
+                "╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░░░░╚═╝░░░╚══════╝╚══════╝  ╚═════╝░╚═╝░░╚═╝╚═╝╚═╝░░░░░");
+
+    }
+
+    private void printGameOver() {
+        System.out.println("┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼\n" +
+                "███▀▀▀██┼███▀▀▀███┼███▀█▄█▀███┼██▀▀▀\n" +
+                "██┼┼┼┼██┼██┼┼┼┼┼██┼██┼┼┼█┼┼┼██┼██┼┼┼\n" +
+                "██┼┼┼▄▄▄┼██▄▄▄▄▄██┼██┼┼┼▀┼┼┼██┼██▀▀▀\n" +
+                "██┼┼┼┼██┼██┼┼┼┼┼██┼██┼┼┼┼┼┼┼██┼██┼┼┼\n" +
+                "███▄▄▄██┼██┼┼┼┼┼██┼██┼┼┼┼┼┼┼██┼██▄▄▄\n" +
+                "┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼\n" +
+                "███▀▀▀███┼▀███┼┼██▀┼██▀▀▀┼██▀▀▀▀██▄┼\n" +
+                "██┼┼┼┼┼██┼┼┼██┼┼██┼┼██┼┼┼┼██┼┼┼┼┼██┼\n" +
+                "██┼┼┼┼┼██┼┼┼██┼┼██┼┼██▀▀▀┼██▄▄▄▄▄▀▀┼\n" +
+                "██┼┼┼┼┼██┼┼┼██┼┼█▀┼┼██┼┼┼┼██┼┼┼┼┼██┼\n" +
+                "███▄▄▄███┼┼┼─▀█▀┼┼─┼██▄▄▄┼██┼┼┼┼┼██▄\n" +
+                "┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼\n" +
+                "┼┼┼┼┼┼┼┼██┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼██┼┼┼┼┼┼┼┼┼\n" +
+                "┼┼┼┼┼┼████▄┼┼┼▄▄▄▄▄▄▄┼┼┼▄████┼┼┼┼┼┼┼\n" +
+                "┼┼┼┼┼┼┼┼┼▀▀█▄█████████▄█▀▀┼┼┼┼┼┼┼┼┼┼\n" +
+                "┼┼┼┼┼┼┼┼┼┼┼█████████████┼┼┼┼┼┼┼┼┼┼┼┼\n" +
+                "┼┼┼┼┼┼┼┼┼┼┼██▀▀▀███▀▀▀██┼┼┼┼┼┼┼┼┼┼┼┼\n" +
+                "┼┼┼┼┼┼┼┼┼┼┼██┼┼┼███┼┼┼██┼┼┼┼┼┼┼┼┼┼┼┼\n" +
+                "┼┼┼┼┼┼┼┼┼┼┼█████▀▄▀█████┼┼┼┼┼┼┼┼┼┼┼┼\n" +
+                "┼┼┼┼┼┼┼┼┼┼┼┼███████████┼┼┼┼┼┼┼┼┼┼┼┼┼\n" +
+                "┼┼┼┼┼┼┼┼▄▄▄██┼┼█▀█▀█┼┼██▄▄▄┼┼┼┼┼┼┼┼┼\n" +
+                "┼┼┼┼┼┼┼┼▀▀██┼┼┼┼┼┼┼┼┼┼┼██▀▀┼┼┼┼┼┼┼┼┼\n" +
+                "┼┼┼┼┼┼┼┼┼┼▀▀┼┼┼┼┼┼┼┼┼┼┼▀▀┼┼┼┼┼┼┼┼┼┼┼\n" +
+                "┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼\n" +
+                "Game Over, player 2 wins, lets go, haha!");
+
+
+    }
+
+    private String safeNextLine() {
+        // The point of this is to use s.nextLine() but not throw an error
+
+
+        boolean validInput = false;
+        String text = "";
+        //todo fix
+
+        while (!validInput) {
+
+            // This try catch catches any errors that scanner throws
+            try {
+
+                text = r.nextLine();
+
+//                // This makes sure the input is not a number
+//                try {
+//
+//                    // If this throws an error, then we know its not a number.
+//                    Integer.parseInt(text);
+//
+//                }
+
+                validInput = true;
+            } catch (Exception e) {
+                System.out.println("\nSorry, but that input is not valid. Please try again\n");
+
+
+            }
+
+        }
+
+        return text;
+    }
+
+    private int safeNextInt() {
+
+        // The point of this is to use s.nextLine() but not throw an error
+
+
+        boolean validInput = false;
+        int text = -999;
+        //todo fix
+
+        while (!validInput) {
+
+            // This try catch catches any errors that scanner throws
+            try {
+
+                text = r.nextInt();
+
+
+                if (text != -999)
+                    validInput = true;
+            } catch (Exception e) {
+                System.out.println("\nSorry, but that input is not valid. Please try again\n");
+                r.nextLine();
+            }
+
+        }
+
+        return text;
 
 
     }

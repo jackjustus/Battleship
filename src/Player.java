@@ -47,7 +47,7 @@ public class Player {
                 else
                     System.out.println("Too bad. You're playing with " + Board.NUM_SHIPS);
                 //TODO: REMOVE THIS DEBUG MODE WHEN FINISHED
-                b = new Board(true);
+                b = new Board();
                 numShipsGood = true;
             } catch (Error e) {
                 System.out.println("Need to input int!");
@@ -99,6 +99,7 @@ public class Player {
 
             //takes y coordinate (letter) and validates
             System.out.print(name + ", enter the [y] coordinate you want to attack \n >> ");
+
             // Scanner Bugfix
             s.nextLine();
             y = Translate.convert(s.nextLine());

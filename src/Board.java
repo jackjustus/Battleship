@@ -66,8 +66,7 @@ public class Board {
 
             while (!inputWorks) {
 
-                if (!firstRun)
-                    print("Sorry, your input is not valid. Try again!");
+                if (!firstRun) print("Sorry, your input is not valid. Try again!");
 
 
                 // Starts true and gets sets false when it fails
@@ -85,10 +84,8 @@ public class Board {
 
                 // This int rotation needs to be converted to a boolean so that the x input validation can use it
                 boolean isVertical;
-                if (rotation == 1)
-                    isVertical = true;
-                else if (rotation == 2)
-                    isVertical = false;
+                if (rotation == 1) isVertical = true;
+                else if (rotation == 2) isVertical = false;
                 else {
                     // This signals that the input is not valid
                     inputWorks = false;
@@ -106,10 +103,8 @@ public class Board {
 
                 // Converting isVertical to a string
                 String verticalString;
-                if (isVertical)
-                    verticalString = "vertical";
-                else
-                    verticalString = "horizontal";
+                if (isVertical) verticalString = "vertical";
+                else verticalString = "horizontal";
 
                 // At this point we can run input validation for all the inputs.
                 if (inputValidation(x, y, isVertical, shipLength)) {
@@ -228,25 +223,22 @@ public class Board {
         // Intellij is being stupid about initializing this variable to do this
         int rotationalValue = 0;
 
-        while (!inputValid)
-            try {
-                print("\nWould you like your ship to be vertical or horizontal?\n");
-                print("1 = Vertical        2 = Horizontal\n");
-                rotationalValue = safeNextInt();
+        while (!inputValid) try {
+            print("\nWould you like your ship to be vertical or horizontal?\n");
+            print("1 = Vertical        2 = Horizontal\n");
+            rotationalValue = safeNextInt();
 
-                // Mini input validation
-                if (rotationalValue != 1 && rotationalValue != 2)
-                    rotationalValueNotValid(false);
+            // Mini input validation
+            if (rotationalValue != 1 && rotationalValue != 2) rotationalValueNotValid(false);
 
-                // Checking to see if the input is valid
-                // If it is valid then the loop will end
-                while (!inputRotationValidation(rotationalValue))
-                    rotationalValue = safeNextInt();
-                inputValid = true;
+            // Checking to see if the input is valid
+            // If it is valid then the loop will end
+            while (!inputRotationValidation(rotationalValue)) rotationalValue = safeNextInt();
+            inputValid = true;
 
-            } catch (Exception e) {
-                rotationalValueNotValid(true);
-            }
+        } catch (Exception e) {
+            rotationalValueNotValid(true);
+        }
 //                    e.printStackTrace();
         print("\n");
         return rotationalValue;
@@ -259,8 +251,7 @@ public class Board {
         print("Sorry, but that is not a valid input. Please enter either [1] or [2].\n");
 
         // This is sometimes required in order to patch a scanner bug
-        if (bugFixRequired)
-            s.nextLine();
+        if (bugFixRequired) safeNextLine();
 
     }
 
@@ -296,8 +287,7 @@ public class Board {
                     value = Translate.convert(temp) - 1;
 
                     // If the input the player entered was invalid
-                    while (value == -1)
-                        value = Translate.convert(temp) - 1;
+                    while (value == -1) value = Translate.convert(temp) - 1;
                 } catch (Exception e) {
                     // e.printStackTrace();
 
@@ -537,14 +527,11 @@ public class Board {
         ArrayList<int[]> shipCoords = new ArrayList<>(Arrays.asList(s.getCoordinates()));
 
         // Check if the x and y is within bounds
-        if (x > 9 || y > 9)
-            return false;
+        if (x > 9 || y > 9) return false;
 
         // Check if the ships go off the board
-        if (x > (10 - shipLength) && !isVertical)
-            return false;
-        if (y > (10 - shipLength) && isVertical)
-            return false;
+        if (x > (10 - shipLength) && !isVertical) return false;
+        if (y > (10 - shipLength) && isVertical) return false;
 
 
         for (int[] shipCoord : shipCoords) {
@@ -623,7 +610,7 @@ public class Board {
         print(SHIP_HIT_SYMBOL + ": - Ship Hit\n");
 
         // Ships
-        for (int i = 0; i < NUM_SHIPS; i++) {
+        for (int i = 0; i < ships.size(); i++) {
             print(Translate.convert(i) + ": - " + ships.get(i).getName() + "\n");
         }
     }
@@ -672,8 +659,7 @@ public class Board {
         // -1 if the ocean was hit; -2 if a ship was hit
 
         // Here we need to differentiate between a ship being hit or the ocean and mark the board accordingly
-        if (squares[x][y].equals("0"))
-            squares[x][y] = "-1";
+        if (squares[x][y].equals("0")) squares[x][y] = "-1";
         else
             // This means a ship was hit, because you cannot shoot at the same place twice
             squares[x][y] = "-2";
@@ -859,8 +845,7 @@ public class Board {
                 text = s.nextInt();
 
 
-                if (text != -999)
-                    validInput = true;
+                if (text != -999) validInput = true;
             } catch (Exception e) {
                 print("\nSorry, but that input is not valid. Please try again\n");
                 s.nextLine();
