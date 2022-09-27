@@ -13,7 +13,7 @@ public class Board {
     private int[] shipLengths;
 
     // Constants
-    static final int NUM_SHIPS = 1;
+    static final int NUM_SHIPS = 5;
     private final String OCEAN_HIT_SYMBOL = "^";
     private final String SHIP_HIT_SYMBOL = "x";
     private final String EMPTY_BOARD_SYMBOL = "_";
@@ -111,7 +111,7 @@ public class Board {
 
 
                     // Giving the player feedback based on all of their input
-                    print("You placed a " + verticalString + " length " + shipLength + " ship at " + x + ", " + y + "\n");
+                    print("\nYou placed a " + verticalString + " length " + shipLength + " ship at " + x + ", " + y + "\n");
 
 
                     // Assigning a letter to the ship based on how many times this loop has run
@@ -129,10 +129,10 @@ public class Board {
                     // Marking on the board where the ship is placed
                     markBoardShipPlacement(ships.get(i));
 
-                    clearConsole();
+//                    clearConsole();
 
                     // Differentiating between ship placements
-                    print("\n\nShip " + (i + 1) + " Placed.\n\n");
+                    print("Ship " + (i + 1) + " Placed.\n\n\n\n");
 
                 } else {
                     // If input validation fails
@@ -283,20 +283,27 @@ public class Board {
                 String temp = safeNextLine();
                 temp = safeNextLine();
 
+
+                // I have to make sure the player inputted a letter
+                while (Translate.convert(temp) == -1)
+                    temp = safeNextLine();
+
+                // For some reason a -1 is needed here
+                value = Translate.convert(temp) - 1;
                 // Putting this in a try catch just in case
-                try {
-                    value = Translate.convert(temp) - 1;
-
-                    // If the input the player entered was invalid
-                    while (value == -1) value = Translate.convert(temp) - 1;
-                } catch (Exception e) {
-                    // e.printStackTrace();
-
-                    print("The letter you entered is not valid");
-
-                    // This flags the input validation and will prompt the player to input a new number by running this method again
-                    return 999;
-                }
+//                try {
+//                    value = Translate.convert(temp) - 1;
+//
+//                    // If the input the player entered was invalid
+//                    while (value == -1) value = Translate.convert(temp) - 1;
+//                } catch (Exception e) {
+//                    // e.printStackTrace();
+//
+//                    print("The letter you entered is not valid");
+//
+//                    // This flags the input validation and will prompt the player to input a new number by running this method again
+//                    return 999;
+//                }
 
             }
 

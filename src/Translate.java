@@ -17,7 +17,7 @@ public class Translate {
                 return (i + 1);
             }
         }
-        System.out.println("ERROR. Letter not available.");
+        System.out.println("ERROR. Letter not available or input is not a letter.");
         return -1;
     }
     public static String convert(int s){

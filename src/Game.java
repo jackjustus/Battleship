@@ -24,36 +24,32 @@ public class Game {
 
         r = new Scanner(System.in);
 
+        // Battle ship Logo
         printGameStart();
 
-//        while (userint != 1 && userint != 2) {
-//            System.out.print("Would you like to play vs. a computer [1] or player [2]?\n >> ");
-//            userint = r.nextInt();
-//        }
-
-//        if(userint == 1)\
-        System.out.println("Player 1, press enter if you are ready!");
+        // Getting the players initialized
+        // This also prompts the players to place all of their ships
+        System.out.println("Player 1, press [Enter] twice if you are ready!");
         safeNextLine();
         safeNextLine();
         Player player1 = new Player();
-        System.out.println("Player 2, press enter if you are ready!");
+        System.out.println("Player 2, press [Enter] twice if you are ready!");
+        safeNextLine();
         safeNextLine();
         Player player2 = new Player();
 
-//        }
-        //What we would do if we added a computer player
-//        else {
-//            System.out.println(">>Player 1, press enter if you are ready!");
-//            r.nextLine();
-//            Player player1 = new Player();
-//            Player player2 = new Player("Computer");
-//        }
+        // Transitioning to playing the game
+        clearConsole();
+        System.out.println("You have finished placing your ships.\nPress [Enter] to show the other player's information");
+        safeNextLine();
+        clearConsole();
+
 
         while (play) {
             player1.attack(player2.getBoard());
 
             if (player1.getOtherPlayerSunken() == Board.NUM_SHIPS) {
-                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                clearConsole();
                 printGameOver();
                 play = false;
                 continue;
@@ -61,12 +57,18 @@ public class Game {
             player2.attack(player1.getBoard());
 
             if (player2.getOtherPlayerSunken() == Board.NUM_SHIPS) {
-                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                clearConsole();
                 printGameOver();
                 play = false;
             }
         }
 
+
+    }
+
+    private void clearConsole() {
+
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
     }
 
