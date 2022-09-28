@@ -87,18 +87,18 @@ public class Player {
 
 
             //takes x coordinate (number) and validates
-            System.out.print("Hello " + name + ", enter the [x] coordinate you want to attack \n >> ");
+            System.out.print("Hello " + name + ", enter the [x] row you want to attack \n >> ");
             x = safeNextInt();
 
             while (x > 10 || x < 1) {
                 System.out.println(">>Invalid");
-                System.out.println(name + ", enter the [x] coordinate you want to attack \n >> ");
+                System.out.println(name + ", enter the [x] row you want to attack \n >> ");
                 x = safeNextInt();
             }
 
 
             //takes y coordinate (letter) and validates
-            System.out.print(name + ", enter the [y] coordinate you want to attack \n >> ");
+            System.out.print(name + ", enter the [y] column you want to attack \n >> ");
 
             // Scanner Bugfix
             safeNextLine();
@@ -106,7 +106,7 @@ public class Player {
 
             while (y == -1) {
                 System.out.println("Invalid");
-                System.out.println(name + ", enter the [y] coordinate you want to attack \n >> ");
+                System.out.println(name + ", enter the [y] column you want to attack \n >> ");
                 y = Translate.convert(safeNextLine());
             }
 
